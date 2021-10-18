@@ -1,0 +1,275 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 4 6
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:C_Small C40
+U 1 1 60DE8F66
+P 2650 4025
+F 0 "C40" H 2742 4071 50  0000 L CNN
+F 1 "10uF/25V(20%)" H 2742 3980 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 2650 4025 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1811131721_Murata-Electronics-GRM188R61E106MA73D_C91606.pdf" H 2650 4025 50  0001 C CNN
+F 4 "0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS " H 2650 4025 50  0001 C CNN "Description"
+F 5 "C91606" H 2650 4025 50  0001 C CNN "LCSC"
+	1    2650 4025
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C39
+U 1 1 60DE9208
+P 2375 4025
+F 0 "C39" H 2284 3979 50  0000 R CNN
+F 1 "100nF" H 2284 4070 50  0000 R CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 2375 4025 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1811072013_FH-Guangdong-Fenghua-Advanced-Tech-0402F104M500NT_C1581.pdf" H 2375 4025 50  0001 C CNN
+F 4 "100nF ±10% 50V X7R 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT RoHS" H 2375 4025 50  0001 C CNN "Description"
+F 5 "C1581" H 2375 4025 50  0001 C CNN "LCSC"
+	1    2375 4025
+	1    0    0    1   
+$EndComp
+$Comp
+L power:+3.3V #PWR0107
+U 1 1 60DEA696
+P 2375 3825
+F 0 "#PWR0107" H 2375 3675 50  0001 C CNN
+F 1 "+3.3V" H 2390 3998 50  0000 C CNN
+F 2 "" H 2375 3825 50  0001 C CNN
+F 3 "" H 2375 3825 50  0001 C CNN
+	1    2375 3825
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0109
+U 1 1 60DEAC6D
+P 2650 3825
+F 0 "#PWR0109" H 2650 3675 50  0001 C CNN
+F 1 "+3.3V" H 2665 3998 50  0000 C CNN
+F 2 "" H 2650 3825 50  0001 C CNN
+F 3 "" H 2650 3825 50  0001 C CNN
+	1    2650 3825
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0108
+U 1 1 60DEB6B3
+P 2375 4225
+F 0 "#PWR0108" H 2375 3975 50  0001 C CNN
+F 1 "GND" H 2380 4052 50  0000 C CNN
+F 2 "" H 2375 4225 50  0001 C CNN
+F 3 "" H 2375 4225 50  0001 C CNN
+	1    2375 4225
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0110
+U 1 1 60DEBC70
+P 2650 4225
+F 0 "#PWR0110" H 2650 3975 50  0001 C CNN
+F 1 "GND" H 2655 4052 50  0000 C CNN
+F 2 "" H 2650 4225 50  0001 C CNN
+F 3 "" H 2650 4225 50  0001 C CNN
+	1    2650 4225
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 4125 2650 4225
+Wire Wire Line
+	2375 3825 2375 3925
+Wire Wire Line
+	2375 4125 2375 4225
+Wire Wire Line
+	2650 3825 2650 3925
+Wire Wire Line
+	4825 3100 4750 3100
+Wire Wire Line
+	4750 3800 4750 3100
+Wire Wire Line
+	4750 3800 4825 3800
+Connection ~ 4750 3800
+$Comp
+L power:GND #PWR0114
+U 1 1 60DFAA51
+P 4750 5250
+F 0 "#PWR0114" H 4750 5000 50  0001 C CNN
+F 1 "GND" H 4755 5077 50  0000 C CNN
+F 2 "" H 4750 5250 50  0001 C CNN
+F 3 "" H 4750 5250 50  0001 C CNN
+	1    4750 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4750 3800 4750 5250
+$Comp
+L power:+3.3V #PWR0111
+U 1 1 60DFC4C5
+P 3600 3050
+F 0 "#PWR0111" H 3600 2900 50  0001 C CNN
+F 1 "+3.3V" H 3615 3223 50  0000 C CNN
+F 2 "" H 3600 3050 50  0001 C CNN
+F 3 "" H 3600 3050 50  0001 C CNN
+	1    3600 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4125 4000 4125 3900
+Connection ~ 4125 3900
+Wire Wire Line
+	4125 3900 3600 3900
+Text Notes 5100 4625 0    50   ~ 0
+1: GND\n2: RST\n3: CLK\n4: D_CX\n5: CS\n6: MOSI\n7: MISO (NC)\n8: GND\n9: VCC\n10: LEDA\n11: LEDK1\n12: LEDK2\n13: LEDK3\n14: LEDK4\n15: XL (Touch)\n16: YU (Touch)\n17: XR (Touch)\n18: YD (Touch)
+NoConn ~ 4825 4800
+NoConn ~ 4825 4700
+NoConn ~ 4825 4600
+NoConn ~ 4825 4500
+Wire Wire Line
+	4825 4100 4575 4100
+Wire Wire Line
+	4575 4100 4575 4200
+Wire Wire Line
+	4575 4200 4825 4200
+Wire Wire Line
+	4825 4300 4575 4300
+Wire Wire Line
+	4575 4300 4575 4200
+Connection ~ 4575 4200
+Wire Wire Line
+	4825 4400 4575 4400
+Wire Wire Line
+	4575 4400 4575 4300
+Connection ~ 4575 4300
+Connection ~ 4575 4400
+Wire Wire Line
+	4325 4400 4325 4625
+$Comp
+L power:GND #PWR0113
+U 1 1 60E17DB1
+P 4325 5250
+F 0 "#PWR0113" H 4325 5000 50  0001 C CNN
+F 1 "GND" H 4330 5077 50  0000 C CNN
+F 2 "" H 4325 5250 50  0001 C CNN
+F 3 "" H 4325 5250 50  0001 C CNN
+	1    4325 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4325 5250 4325 5025
+Text HLabel 4325 3200 0    50   Input ~ 0
+LCD_RST
+Text HLabel 4325 3300 0    50   Input ~ 0
+LCD_CLK
+Text HLabel 4325 3400 0    50   Input ~ 0
+LCD_D_CX
+Text HLabel 4325 3500 0    50   Input ~ 0
+LCD_CS
+Text HLabel 4325 3600 0    50   Input ~ 0
+LCD_MOSI
+Wire Wire Line
+	4325 4400 4575 4400
+$Comp
+L Device:R_Small R31
+U 1 1 61C1120F
+P 3825 4825
+F 0 "R31" V 3675 4825 50  0000 C CNN
+F 1 "15" V 3750 4825 50  0000 C CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 3825 4825 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810170733_TA-I-Tech-RMS04FT15R0_C208806.pdf" H 3825 4825 50  0001 C CNN
+F 4 "15Ω ±1% 1/16W ±200ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 3825 4825 50  0001 C CNN "Description"
+F 5 "C208806" H 3825 4825 50  0001 C CNN "LCSC"
+	1    3825 4825
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3925 4825 3975 4825
+Wire Wire Line
+	3625 4825 3725 4825
+Text HLabel 3625 4825 0    50   Input ~ 0
+LCD_BL
+$Comp
+L Transistor_FET:BSS138 Q?
+U 1 1 61C278CE
+P 4225 4825
+AR Path="/61C278CE" Ref="Q?"  Part="1" 
+AR Path="/61051F09/61C278CE" Ref="Q7"  Part="1" 
+F 0 "Q7" H 4430 4779 50  0000 L CNN
+F 1 "BSS138" H 4430 4870 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4425 4750 50  0001 L CIN
+F 3 "https://datasheet.lcsc.com/szlcsc/1909061434_SLKORMICRO-Elec-BSS138_C426569.pdf" H 4225 4825 50  0001 L CNN
+F 4 "MOSFET N Trench 50V 220mA 1.6V @ 1mA 3.5 Ω @ 220mA,10V SOT-23 RoHS " H 4225 4825 50  0001 C CNN "Description"
+F 5 "C426569" H 4225 4825 50  0001 C CNN "LCSC"
+	1    4225 4825
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4325 3300 4825 3300
+Wire Wire Line
+	4325 3400 4825 3400
+Wire Wire Line
+	4325 3500 4825 3500
+Wire Wire Line
+	4325 3600 4825 3600
+Wire Wire Line
+	4325 3200 4825 3200
+Wire Wire Line
+	4125 4000 4825 4000
+Wire Wire Line
+	4125 3900 4825 3900
+$Comp
+L Connector_Generic:Conn_01x18 LCD1
+U 1 1 60E00F95
+P 5025 3900
+F 0 "LCD1" H 4925 4925 50  0000 L CNN
+F 1 "Display" H 4900 4825 50  0000 L CNN
+F 2 "OOO 2021:ILI9341_2.4" H 5025 3900 50  0001 C CNN
+F 3 "~" H 5025 3900 50  0001 C CNN
+	1    5025 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 620E8B8C
+P 3975 5050
+AR Path="/620E8B8C" Ref="R?"  Part="1" 
+AR Path="/61051F09/620E8B8C" Ref="R32"  Part="1" 
+F 0 "R32" V 3800 5125 50  0000 R CNN
+F 1 "10K" V 3900 5125 50  0000 R CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 3975 5050 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 3975 5050 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 3975 5050 50  0001 C CNN "Description"
+F 5 "C25744" H 3975 5050 50  0001 C CNN "LCSC"
+	1    3975 5050
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0112
+U 1 1 620EA8EE
+P 3975 5250
+F 0 "#PWR0112" H 3975 5000 50  0001 C CNN
+F 1 "GND" H 3980 5077 50  0000 C CNN
+F 2 "" H 3975 5250 50  0001 C CNN
+F 3 "" H 3975 5250 50  0001 C CNN
+	1    3975 5250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3975 4825 3975 4950
+Connection ~ 3975 4825
+Wire Wire Line
+	3975 4825 4025 4825
+Wire Wire Line
+	3975 5150 3975 5250
+Wire Wire Line
+	3600 3050 3600 3900
+NoConn ~ 4825 3700
+$EndSCHEMATC

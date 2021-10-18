@@ -1,0 +1,27 @@
+%TF.GenerationSoftware,KiCad,Pcbnew,5.1.10-88a1d61d58~90~ubuntu20.04.1*%
+%TF.CreationDate,2021-10-01T06:26:35-07:00*%
+%TF.ProjectId,Moon_Addon,4d6f6f6e-5f41-4646-946f-6e2e6b696361,rev?*%
+%TF.SameCoordinates,Original*%
+%TF.FileFunction,Soldermask,Top*%
+%TF.FilePolarity,Negative*%
+%FSLAX45Y45*%
+G04 Gerber Fmt 4.5, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 5.1.10-88a1d61d58~90~ubuntu20.04.1) date 2021-10-01 06:26:35*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+%ADD10O,1.700000X1.700000*%
+%ADD11R,1.700000X1.700000*%
+G04 APERTURE END LIST*
+D10*
+%TO.C,J1*%
+X10300000Y-12200000D03*
+X10300000Y-11946000D03*
+X10046000Y-12200000D03*
+X10046000Y-11946000D03*
+X9792000Y-12200000D03*
+D11*
+X9792000Y-11946000D03*
+%TD*%
+M02*

@@ -1,0 +1,33 @@
+"Source:","/home/mgrim/Hardware/Moon_Addon/Moon_Addon.sch"
+"Date:","Fri 01 Oct 2021 07:13:29 AM PDT"
+"Tool:","Eeschema 5.1.10-88a1d61d58~90~ubuntu20.04.1"
+"Generator:","/usr/share/kicad/plugins/bom_csv_grouped_by_value.py"
+"Component Count:","13"
+
+"Individual Components:"
+
+"Item","Qty","Reference(s)","Value","LibPart","Footprint","Datasheet","LCSC"
+"","","D6","LED","Device:LED","LED_SMD:LED_0805_2012Metric_Castellated","https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_white-0805_C34499.html","C34499"
+"","","D7","LED","Device:LED","LED_SMD:LED_0805_2012Metric_Castellated","https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_white-0805_C34499.html","C34499"
+"","","D8","LED","Device:LED","LED_SMD:LED_0805_2012Metric_Castellated","https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_white-0805_C34499.html","C34499"
+"","","D9","LED","Device:LED","LED_SMD:LED_0805_2012Metric_Castellated","https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_white-0805_C34499.html","C34499"
+"","","D10","LED","Device:LED","LED_SMD:LED_0805_2012Metric_Castellated","https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_white-0805_C34499.html","C34499"
+"","","J1","ShittyAddon_V1.69bis","Moon_Addon:ShittyAddon_V1.69bis","Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical","",""
+"","","Q2","AO3400A","Transistor_FET:AO3400A","Package_TO_SOT_SMD:SOT-23","https://datasheet.lcsc.com/lcsc/1811081213_Alpha-&-Omega-Semicon-AO3400A_C20917.pdf","C20917"
+"","","R6","15","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810301815_UNI-ROYAL-Uniroyal-Elec-0805W8F150JT5E_C17480.pdf","C17480"
+"","","R7","15","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810301815_UNI-ROYAL-Uniroyal-Elec-0805W8F150JT5E_C17480.pdf","C17480"
+"","","R8","15","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810301815_UNI-ROYAL-Uniroyal-Elec-0805W8F150JT5E_C17480.pdf","C17480"
+"","","R9","15","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810301815_UNI-ROYAL-Uniroyal-Elec-0805W8F150JT5E_C17480.pdf","C17480"
+"","","R10","15","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810301815_UNI-ROYAL-Uniroyal-Elec-0805W8F150JT5E_C17480.pdf","C17480"
+"","","R12","10K","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810271610_UNI-ROYAL-Uniroyal-Elec-0805W8F1002T5E_C17414.pdf","C17414"
+
+
+
+"Collated Components:"
+
+"Item","Qty","Reference(s)","Value","LibPart","Footprint","Datasheet","LCSC"
+"1","5","D6, D7, D8, D9, D10","LED","Device:LED","LED_SMD:LED_0805_2012Metric_Castellated","https://lcsc.com/product-detail/Light-Emitting-Diodes-LED_white-0805_C34499.html","C34499"
+"2","1","J1","ShittyAddon_V1.69bis","Moon_Addon:ShittyAddon_V1.69bis","Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical","",""
+"3","1","Q2","AO3400A","Transistor_FET:AO3400A","Package_TO_SOT_SMD:SOT-23","https://datasheet.lcsc.com/lcsc/1811081213_Alpha-&-Omega-Semicon-AO3400A_C20917.pdf","C20917"
+"4","5","R6, R7, R8, R9, R10","15","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810301815_UNI-ROYAL-Uniroyal-Elec-0805W8F150JT5E_C17480.pdf","C17480"
+"5","1","R12","10K","Device:R_Small","Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder","https://datasheet.lcsc.com/lcsc/1810271610_UNI-ROYAL-Uniroyal-Elec-0805W8F1002T5E_C17414.pdf","C17414"

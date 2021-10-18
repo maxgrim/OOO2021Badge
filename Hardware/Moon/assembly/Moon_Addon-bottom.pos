@@ -1,0 +1,18 @@
+### Module positions - created on Fri Oct  1 07:13:50 2021 ###
+### Printed by Pcbnew version kicad 5.1.10-88a1d61d58~90~ubuntu20.04.1
+## Unit = mm, Angle = deg.
+## Side : bottom
+# Ref     Val       Package                                           PosX       PosY       Rot  Side
+D6        LED       LED_0805_2012Metric_Castellated                99.9400   -79.1850  180.0000  bottom
+D7        LED       LED_0805_2012Metric_Castellated               119.8694   -93.6645  108.0000  bottom
+D8        LED       LED_0805_2012Metric_Castellated               112.2570  -117.0930   36.0000  bottom
+D9        LED       LED_0805_2012Metric_Castellated                87.6230  -117.0930  324.0000  bottom
+D10       LED       LED_0805_2012Metric_Castellated                80.0106   -93.6645  252.0000  bottom
+Q2        AO3400A   SOT-23                                        100.6500  -109.1000   90.0000  bottom
+R6        15        R_0805_2012Metric_Pad1.20x1.40mm_HandSolder    99.9400   -81.7250  180.0000  bottom
+R7        15        R_0805_2012Metric_Pad1.20x1.40mm_HandSolder   117.4537   -94.4495  108.0000  bottom
+R8        15        R_0805_2012Metric_Pad1.20x1.40mm_HandSolder   110.7641  -115.0380   36.0000  bottom
+R9        15        R_0805_2012Metric_Pad1.20x1.40mm_HandSolder    89.1159  -115.0380  324.0000  bottom
+R10       15        R_0805_2012Metric_Pad1.20x1.40mm_HandSolder    82.4263   -94.4495  252.0000  bottom
+R12       10K       R_0805_2012Metric_Pad1.20x1.40mm_HandSolder   100.4500  -113.2500  180.0000  bottom
+## End

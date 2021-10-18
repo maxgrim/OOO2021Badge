@@ -1,0 +1,105 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP DW01A-G
+F https://datasheet.lcsc.com/lcsc/Guangdong-Hottech-DW01_C181096.pdf
+$ENDCMP
+#
+$CMP FM8002A
+F https://datasheet.lcsc.com/lcsc/2010161003_Shenzhen-Fuman-Elec-FM8002A_C94625.pdf
+$ENDCMP
+#
+$CMP FS312F-G
+F https://datasheet.lcsc.com/lcsc/1810101017_Fortune-Semicon-DW01-G_C14213.pdf
+$ENDCMP
+#
+$CMP FS3525NB0820-H5.6
+D Speaker
+K speaker sound
+F https://datasheet.lcsc.com/lcsc/2009100335_FUET-FS3525NB0820-H5-6_C782114.pdf
+$ENDCMP
+#
+$CMP FSUSB30MUX
+D ON Semiconductor FSUSB30MUX, USB Power Switch, 10 10-Pin, MSOP
+F https://www.onsemi.com/pub/Collateral/FSUSB30-D.pdf
+$ENDCMP
+#
+$CMP GND_AUDIO
+D Power symbol creates a global label with name "GNDA" , analog ground
+K power-flag
+$ENDCMP
+#
+$CMP IRM-H638T-TR2-DX
+F https://datasheet.lcsc.com/szlcsc/2010221806_Everlight-Elec-IRM-H638T-TR2-DX_C390031.pdf
+$ENDCMP
+#
+$CMP LP4061B6F
+F https://datasheet.lcsc.com/lcsc/2004281203_LOWPOWER-LP4061B6F_C517027.pdf
+$ENDCMP
+#
+$CMP LPW5209
+F https://datasheet.lcsc.com/szlcsc/1912111437_LOWPOWER-LPW5209AB5F_C387727.pdf
+$ENDCMP
+#
+$CMP MAX98357AETE+T
+F https://datasheets.maximintegrated.com/en/ds/MAX98357A-MAX98357B.pdf
+$ENDCMP
+#
+$CMP NCP1529A
+D 1.7MHz, 1A, High Efficiency, Low Ripple, Adjustable Output Voltage Step-down Converter, SOT-23-5
+K Step-Down Buck DC-DC Regulator Adjustable
+F https://www.onsemi.com/pub/Collateral/NCP1529-D.PDF
+$ENDCMP
+#
+$CMP SY8079AAC
+D High Efficiency Synchronous Buck Converter, Adjustable Output 0.6V-5.5V, 1A, SOT-23-5
+K Step-Down Buck DC-DC Regulator Adjustable
+F http://www.ti.com/lit/ds/symlink/tlv62568.pdf
+$ENDCMP
+#
+$CMP TCA9539PWR
+F https://datasheet.lcsc.com/lcsc/1809192236_Texas-Instruments-TCA9539PWR_C131972.pdf
+$ENDCMP
+#
+$CMP TF-115K
+D Micro SD Card Socket
+K connector SD microsd
+F https://datasheet.lcsc.com/lcsc/2012311032_XUNPU-TF-115K_C266621.pdf
+$ENDCMP
+#
+$CMP TLV62569DBV
+D High Efficiency Synchronous Buck Converter, Adjustable Output 0.6V-5.5V, 2A, SOT-23-5
+K Step-Down Buck DC-DC Regulator Adjustable
+F http://www.ti.com/lit/ds/symlink/tlv62569.pdf
+$ENDCMP
+#
+$CMP TM8211
+F https://datasheet.lcsc.com/szlcsc/Shenzhen-Titan-Micro-Elec-TM8211_C92003.pdf
+$ENDCMP
+#
+$CMP TSX073G50D-250
+F https://datasheet.lcsc.com/lcsc/2008181236_BRIGHT-TSX073G50D-250_C722953.pdf
+$ENDCMP
+#
+$CMP TYPE-C-31-M-12
+D USB 2.0-only Type-C Receptacle connector
+K usb universal serial bus type-C USB2.0
+F https://datasheet.lcsc.com/szlcsc/1912111437_LOWPOWER-LPW5209AB5F_C387727.pdf
+$ENDCMP
+#
+$CMP W25Q128JVS
+D 128Mb Serial Flash Memory, Standard/Dual/Quad SPI, SOIC-8
+K flash memory SPI QPI DTR
+F http://www.winbond.com/resource-files/w25q128jv_dtr%20revc%2003272018%20plus.pdf
+$ENDCMP
+#
+$CMP W25Q128JVSIQ
+D 32Mb Serial Flash Memory, Standard/Dual/Quad SPI, SOIC-8
+K flash memory SPI
+F https://datasheet.lcsc.com/lcsc/1811142111_Winbond-Elec-W25Q128JVSIQ_C97521.pdf
+$ENDCMP
+#
+$CMP XC6210B332MR-G
+F https://datasheet.lcsc.com/szlcsc/Torex-Semicon-XC6210B332MR-G_C47719.pdf
+$ENDCMP
+#
+#End Doc Library

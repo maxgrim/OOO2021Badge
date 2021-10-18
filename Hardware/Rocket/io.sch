@@ -1,0 +1,906 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 5 6
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L OOO_2021:TSX073G50D-250 U14
+U 1 1 60EEC1B1
+P 4975 3250
+F 0 "U14" H 4962 3590 50  0000 C CNN
+F 1 "TSX073G50D-250" H 4962 3499 50  0000 C CNN
+F 2 "OOO 2021:SW-SMD_TSX073G50D1-250" H 4975 3000 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/2008181236_BRIGHT-TSX073G50D-250_C722953.pdf" H 4975 3000 50  0001 C CNN
+F 4 "C722953" H 4975 2900 50  0001 C CNN "LCSC"
+F 5 "SMD Multi-Directional Switches RoHS" H 4975 3250 50  0001 C CNN "Description"
+	1    4975 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 3250 5475 3250
+Wire Wire Line
+	5475 3250 5475 3450
+$Comp
+L power:GND #PWR0138
+U 1 1 60EECAD8
+P 5475 3450
+F 0 "#PWR0138" H 5475 3200 50  0001 C CNN
+F 1 "GND" H 5480 3277 50  0000 C CNN
+F 2 "" H 5475 3450 50  0001 C CNN
+F 3 "" H 5475 3450 50  0001 C CNN
+	1    5475 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2125 2500 2175 2500
+Wire Wire Line
+	1325 3625 1325 3675
+$Comp
+L power:GND #PWR0120
+U 1 1 6102DA21
+P 1325 3675
+F 0 "#PWR0120" H 1325 3425 50  0001 C CNN
+F 1 "GND" H 1330 3502 50  0000 C CNN
+F 2 "" H 1325 3675 50  0001 C CNN
+F 3 "" H 1325 3675 50  0001 C CNN
+	1    1325 3675
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1375 3375 1325 3375
+Wire Wire Line
+	1325 3375 1325 3475
+Connection ~ 1325 3625
+Wire Wire Line
+	1375 3625 1325 3625
+Wire Wire Line
+	1375 3475 1325 3475
+Connection ~ 1325 3475
+Wire Wire Line
+	1325 3475 1325 3625
+Wire Wire Line
+	1375 2500 1325 2500
+Wire Wire Line
+	1325 2500 1325 2450
+$Comp
+L power:+3.3V #PWR0119
+U 1 1 61031331
+P 1325 2450
+F 0 "#PWR0119" H 1325 2300 50  0001 C CNN
+F 1 "+3.3V" H 1340 2623 50  0000 C CNN
+F 2 "" H 1325 2450 50  0001 C CNN
+F 3 "" H 1325 2450 50  0001 C CNN
+	1    1325 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0117
+U 1 1 6104ADCA
+P 1150 4300
+F 0 "#PWR0117" H 1150 4150 50  0001 C CNN
+F 1 "+3.3V" H 1165 4473 50  0000 C CNN
+F 2 "" H 1150 4300 50  0001 C CNN
+F 3 "" H 1150 4300 50  0001 C CNN
+	1    1150 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0123
+U 1 1 6104B7BA
+P 1600 4300
+F 0 "#PWR0123" H 1600 4150 50  0001 C CNN
+F 1 "+3.3V" H 1615 4473 50  0000 C CNN
+F 2 "" H 1600 4300 50  0001 C CNN
+F 3 "" H 1600 4300 50  0001 C CNN
+	1    1600 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1150 4300 1150 4350
+Wire Wire Line
+	1600 4300 1600 4350
+$Comp
+L Device:C_Small C41
+U 1 1 6104DE12
+P 1150 4450
+F 0 "C41" H 1242 4496 50  0000 L CNN
+F 1 "100nF" H 1242 4405 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 1150 4450 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1811072013_FH-Guangdong-Fenghua-Advanced-Tech-0402F104M500NT_C1581.pdf" H 1150 4450 50  0001 C CNN
+F 4 "100nF ±10% 50V X7R 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT RoHS" H 1150 4450 50  0001 C CNN "Description"
+F 5 "C1581" H 1150 4450 50  0001 C CNN "LCSC"
+	1    1150 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C42
+U 1 1 61055CEE
+P 1600 4450
+F 0 "C42" H 1692 4496 50  0000 L CNN
+F 1 "1uF/16V(10%)" H 1692 4405 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric" H 1600 4450 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810192023_Samsung-Electro-Mechanics-CL05A105KO5NNNC_C29266.pdf" H 1600 4450 50  0001 C CNN
+F 4 "1uF ±10% 16V X5R 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT RoHS " H 1600 4450 50  0001 C CNN "Description"
+F 5 "C29266 " H 1600 4450 50  0001 C CNN "LCSC"
+	1    1600 4450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1150 4550 1150 4600
+Wire Wire Line
+	1600 4550 1600 4600
+$Comp
+L power:GND #PWR0124
+U 1 1 610572E4
+P 1600 4600
+F 0 "#PWR0124" H 1600 4350 50  0001 C CNN
+F 1 "GND" H 1605 4427 50  0000 C CNN
+F 2 "" H 1600 4600 50  0001 C CNN
+F 3 "" H 1600 4600 50  0001 C CNN
+	1    1600 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0118
+U 1 1 61057B5B
+P 1150 4600
+F 0 "#PWR0118" H 1150 4350 50  0001 C CNN
+F 1 "GND" H 1155 4427 50  0000 C CNN
+F 2 "" H 1150 4600 50  0001 C CNN
+F 3 "" H 1150 4600 50  0001 C CNN
+	1    1150 4600
+	1    0    0    -1  
+$EndComp
+Text Label 2175 2875 0    50   ~ 0
+BTN_B
+Wire Wire Line
+	2125 2575 2175 2575
+Wire Wire Line
+	2175 2650 2125 2650
+Text Label 2175 2950 0    50   ~ 0
+BTN_Select
+Wire Wire Line
+	2175 2725 2125 2725
+Wire Wire Line
+	2175 2800 2125 2800
+Text Label 2175 3625 0    50   ~ 0
+BTN_Menu
+Wire Wire Line
+	2175 2875 2125 2875
+Wire Wire Line
+	1375 2650 1325 2650
+Wire Wire Line
+	1375 2750 1325 2750
+Text HLabel 1325 2650 0    50   Input ~ 0
+SDA
+Text HLabel 1325 2750 0    50   Input ~ 0
+SCL
+Text HLabel 950  2900 0    50   Input ~ 0
+~INT
+Text Label 2175 3100 0    50   ~ 0
+BTN_LTrig
+Text Label 2175 2725 0    50   ~ 0
+BTN_RTrig
+Wire Wire Line
+	2175 2950 2125 2950
+Wire Wire Line
+	2125 3025 2175 3025
+$Comp
+L power:+3.3V #PWR0115
+U 1 1 61033446
+P 825 825
+F 0 "#PWR0115" H 825 675 50  0001 C CNN
+F 1 "+3.3V" H 840 998 50  0000 C CNN
+F 2 "" H 825 825 50  0001 C CNN
+F 3 "" H 825 825 50  0001 C CNN
+	1    825  825 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R34
+U 1 1 610345AE
+P 825 975
+F 0 "R34" H 884 1021 50  0000 L CNN
+F 1 "10K" H 884 930 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 825 975 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 825 975 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 825 975 50  0001 C CNN "Description"
+F 5 "C25744" H 825 975 50  0001 C CNN "LCSC"
+	1    825  975 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	825  825  825  875 
+Wire Wire Line
+	825  1075 825  1125
+Wire Wire Line
+	825  1125 775  1125
+Text Label 775  1125 2    50   ~ 0
+BTN_A
+$Comp
+L Switch:SW_Push SW4
+U 1 1 6103B888
+P 825 1375
+F 0 "SW4" V 875 1600 50  0000 C CNN
+F 1 "A" V 775 1600 50  0000 C CNN
+F 2 "OOO 2021:SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL-2" H 825 1575 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/2002271432_XKB-Connectivity-TS-1187A-C-E-B_C318887.pdf" H 825 1575 50  0001 C CNN
+F 4 "C318887" H 825 1375 50  0001 C CNN "LCSC"
+F 5 "SPST 50mA @ 12VDC Vertical Round Button 260gf SMD Tactile Switches RoHS " H 825 1375 50  0001 C CNN "Description"
+	1    825  1375
+	0    1    1    0   
+$EndComp
+Connection ~ 825  1125
+$Comp
+L power:GND #PWR0116
+U 1 1 6103E72A
+P 825 1625
+F 0 "#PWR0116" H 825 1375 50  0001 C CNN
+F 1 "GND" H 830 1452 50  0000 C CNN
+F 2 "" H 825 1625 50  0001 C CNN
+F 3 "" H 825 1625 50  0001 C CNN
+	1    825  1625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	825  1575 825  1625
+$Comp
+L power:+3.3V #PWR0121
+U 1 1 61071F88
+P 1400 825
+F 0 "#PWR0121" H 1400 675 50  0001 C CNN
+F 1 "+3.3V" H 1415 998 50  0000 C CNN
+F 2 "" H 1400 825 50  0001 C CNN
+F 3 "" H 1400 825 50  0001 C CNN
+	1    1400 825 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R36
+U 1 1 61071F8E
+P 1400 975
+F 0 "R36" H 1459 1021 50  0000 L CNN
+F 1 "10K" H 1459 930 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 1400 975 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 1400 975 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 1400 975 50  0001 C CNN "Description"
+F 5 "C25744" H 1400 975 50  0001 C CNN "LCSC"
+	1    1400 975 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1400 825  1400 875 
+Wire Wire Line
+	1400 1075 1400 1125
+Wire Wire Line
+	1400 1125 1350 1125
+Text Label 1350 1125 2    50   ~ 0
+BTN_B
+$Comp
+L Switch:SW_Push SW5
+U 1 1 61071F99
+P 1400 1375
+F 0 "SW5" V 1450 1600 50  0000 C CNN
+F 1 "B" V 1350 1600 50  0000 C CNN
+F 2 "OOO 2021:SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL-2" H 1400 1575 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/2002271432_XKB-Connectivity-TS-1187A-C-E-B_C318887.pdf" H 1400 1575 50  0001 C CNN
+F 4 "C318887" H 1400 1375 50  0001 C CNN "LCSC"
+F 5 "SPST 50mA @ 12VDC Vertical Round Button 260gf SMD Tactile Switches RoHS " H 1400 1375 50  0001 C CNN "Description"
+	1    1400 1375
+	0    1    1    0   
+$EndComp
+Connection ~ 1400 1125
+$Comp
+L power:GND #PWR0122
+U 1 1 61071FA1
+P 1400 1625
+F 0 "#PWR0122" H 1400 1375 50  0001 C CNN
+F 1 "GND" H 1405 1452 50  0000 C CNN
+F 2 "" H 1400 1625 50  0001 C CNN
+F 3 "" H 1400 1625 50  0001 C CNN
+	1    1400 1625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1400 1575 1400 1625
+$Comp
+L power:+3.3V #PWR0125
+U 1 1 61072FB8
+P 2025 825
+F 0 "#PWR0125" H 2025 675 50  0001 C CNN
+F 1 "+3.3V" H 2040 998 50  0000 C CNN
+F 2 "" H 2025 825 50  0001 C CNN
+F 3 "" H 2025 825 50  0001 C CNN
+	1    2025 825 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R37
+U 1 1 61072FBE
+P 2025 975
+F 0 "R37" H 2084 1021 50  0000 L CNN
+F 1 "10K" H 2084 930 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 2025 975 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 2025 975 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 2025 975 50  0001 C CNN "Description"
+F 5 "C25744" H 2025 975 50  0001 C CNN "LCSC"
+	1    2025 975 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2025 825  2025 875 
+Wire Wire Line
+	2025 1075 2025 1125
+Wire Wire Line
+	2025 1125 1975 1125
+Text Label 1975 1125 2    50   ~ 0
+BTN_Start
+$Comp
+L Switch:SW_Push SW6
+U 1 1 61072FC9
+P 2025 1375
+F 0 "SW6" V 2075 1600 50  0000 C CNN
+F 1 "Start" V 1975 1600 50  0000 C CNN
+F 2 "OOO 2021:SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL-2" H 2025 1575 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/2002271432_XKB-Connectivity-TS-1187A-C-E-B_C318887.pdf" H 2025 1575 50  0001 C CNN
+F 4 "C318887" H 2025 1375 50  0001 C CNN "LCSC"
+F 5 "SPST 50mA @ 12VDC Vertical Round Button 260gf SMD Tactile Switches RoHS " H 2025 1375 50  0001 C CNN "Description"
+	1    2025 1375
+	0    1    1    0   
+$EndComp
+Connection ~ 2025 1125
+$Comp
+L power:GND #PWR0126
+U 1 1 61072FD1
+P 2025 1625
+F 0 "#PWR0126" H 2025 1375 50  0001 C CNN
+F 1 "GND" H 2030 1452 50  0000 C CNN
+F 2 "" H 2025 1625 50  0001 C CNN
+F 3 "" H 2025 1625 50  0001 C CNN
+	1    2025 1625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2025 1575 2025 1625
+$Comp
+L power:+3.3V #PWR0127
+U 1 1 6107615A
+P 2675 825
+F 0 "#PWR0127" H 2675 675 50  0001 C CNN
+F 1 "+3.3V" H 2690 998 50  0000 C CNN
+F 2 "" H 2675 825 50  0001 C CNN
+F 3 "" H 2675 825 50  0001 C CNN
+	1    2675 825 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R38
+U 1 1 61076160
+P 2675 975
+F 0 "R38" H 2734 1021 50  0000 L CNN
+F 1 "10K" H 2734 930 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 2675 975 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 2675 975 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 2675 975 50  0001 C CNN "Description"
+F 5 "C25744" H 2675 975 50  0001 C CNN "LCSC"
+	1    2675 975 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2675 825  2675 875 
+Wire Wire Line
+	2675 1075 2675 1125
+Wire Wire Line
+	2675 1125 2625 1125
+Text Label 2625 1125 2    50   ~ 0
+BTN_Select
+$Comp
+L Switch:SW_Push SW7
+U 1 1 6107616B
+P 2675 1375
+F 0 "SW7" V 2725 1600 50  0000 C CNN
+F 1 "Select" V 2625 1600 50  0000 C CNN
+F 2 "OOO 2021:SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL-2" H 2675 1575 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/2002271432_XKB-Connectivity-TS-1187A-C-E-B_C318887.pdf" H 2675 1575 50  0001 C CNN
+F 4 "C318887" H 2675 1375 50  0001 C CNN "LCSC"
+F 5 "SPST 50mA @ 12VDC Vertical Round Button 260gf SMD Tactile Switches RoHS " H 2675 1375 50  0001 C CNN "Description"
+	1    2675 1375
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2675 1175 2675 1125
+Connection ~ 2675 1125
+$Comp
+L power:GND #PWR0128
+U 1 1 61076173
+P 2675 1625
+F 0 "#PWR0128" H 2675 1375 50  0001 C CNN
+F 1 "GND" H 2680 1452 50  0000 C CNN
+F 2 "" H 2675 1625 50  0001 C CNN
+F 3 "" H 2675 1625 50  0001 C CNN
+	1    2675 1625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2675 1575 2675 1625
+$Comp
+L power:+3.3V #PWR0130
+U 1 1 61083D99
+P 3375 825
+F 0 "#PWR0130" H 3375 675 50  0001 C CNN
+F 1 "+3.3V" H 3390 998 50  0000 C CNN
+F 2 "" H 3375 825 50  0001 C CNN
+F 3 "" H 3375 825 50  0001 C CNN
+	1    3375 825 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R40
+U 1 1 61083D9F
+P 3375 975
+F 0 "R40" H 3434 1021 50  0000 L CNN
+F 1 "10K" H 3434 930 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 3375 975 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 3375 975 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 3375 975 50  0001 C CNN "Description"
+F 5 "C25744" H 3375 975 50  0001 C CNN "LCSC"
+	1    3375 975 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3375 825  3375 875 
+Wire Wire Line
+	3375 1075 3375 1125
+Wire Wire Line
+	3375 1125 3325 1125
+Text Label 3325 1125 2    50   ~ 0
+BTN_Menu
+$Comp
+L Switch:SW_Push SW8
+U 1 1 61083DAA
+P 3375 1375
+F 0 "SW8" V 3425 1600 50  0000 C CNN
+F 1 "Menu" V 3325 1600 50  0000 C CNN
+F 2 "OOO 2021:SW-SMD_4P-L5.1-W5.1-P3.70-LS6.5-TL-2" H 3375 1575 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/2002271432_XKB-Connectivity-TS-1187A-C-E-B_C318887.pdf" H 3375 1575 50  0001 C CNN
+F 4 "C318887" H 3375 1375 50  0001 C CNN "LCSC"
+F 5 "SPST 50mA @ 12VDC Vertical Round Button 260gf SMD Tactile Switches RoHS " H 3375 1375 50  0001 C CNN "Description"
+	1    3375 1375
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3375 1175 3375 1125
+Connection ~ 3375 1125
+$Comp
+L power:GND #PWR0131
+U 1 1 61083DB2
+P 3375 1625
+F 0 "#PWR0131" H 3375 1375 50  0001 C CNN
+F 1 "GND" H 3380 1452 50  0000 C CNN
+F 2 "" H 3375 1625 50  0001 C CNN
+F 3 "" H 3375 1625 50  0001 C CNN
+	1    3375 1625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3375 1575 3375 1625
+$Comp
+L power:+3.3V #PWR0133
+U 1 1 61085C12
+P 4050 825
+F 0 "#PWR0133" H 4050 675 50  0001 C CNN
+F 1 "+3.3V" H 4065 998 50  0000 C CNN
+F 2 "" H 4050 825 50  0001 C CNN
+F 3 "" H 4050 825 50  0001 C CNN
+	1    4050 825 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R42
+U 1 1 61085C18
+P 4050 975
+F 0 "R42" H 4109 1021 50  0000 L CNN
+F 1 "10K" H 4109 930 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 4050 975 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 4050 975 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 4050 975 50  0001 C CNN "Description"
+F 5 "C25744" H 4050 975 50  0001 C CNN "LCSC"
+	1    4050 975 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 825  4050 875 
+Wire Wire Line
+	4050 1075 4050 1125
+Wire Wire Line
+	4050 1125 4000 1125
+Text Label 4000 1125 2    50   ~ 0
+BTN_LTrig
+$Comp
+L Switch:SW_Push SW9
+U 1 1 61085C23
+P 4050 1375
+F 0 "SW9" V 4100 1600 50  0000 C CNN
+F 1 "L" V 4000 1600 50  0000 C CNN
+F 2 "OOO 2021:KEY-TH_4P-L7.5-W6.8-P4.50-LS7.2" H 4050 1575 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/1912111437_XUNPU-TS-1002N-07526_C455134.pdf" H 4050 1575 50  0001 C CNN
+F 4 "C455134" H 4050 1375 50  0001 C CNN "LCSC"
+F 5 "SPST 50mA @ 12VDC Side operation Round Button 260gf Through Hole,6x7.5x7.5mm Tactile Switches RoHS " H 4050 1375 50  0001 C CNN "Description"
+F 6 "Switch must be facing backward" V 4050 1375 50  0001 C CNN "Note"
+	1    4050 1375
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4050 1175 4050 1125
+Connection ~ 4050 1125
+$Comp
+L power:GND #PWR0134
+U 1 1 61085C2B
+P 4050 1625
+F 0 "#PWR0134" H 4050 1375 50  0001 C CNN
+F 1 "GND" H 4055 1452 50  0000 C CNN
+F 2 "" H 4050 1625 50  0001 C CNN
+F 3 "" H 4050 1625 50  0001 C CNN
+	1    4050 1625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 1575 4050 1625
+$Comp
+L power:+3.3V #PWR0136
+U 1 1 610882D9
+P 4725 825
+F 0 "#PWR0136" H 4725 675 50  0001 C CNN
+F 1 "+3.3V" H 4740 998 50  0000 C CNN
+F 2 "" H 4725 825 50  0001 C CNN
+F 3 "" H 4725 825 50  0001 C CNN
+	1    4725 825 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R44
+U 1 1 610882DF
+P 4725 975
+F 0 "R44" H 4784 1021 50  0000 L CNN
+F 1 "10K" H 4784 930 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 4725 975 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 4725 975 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 4725 975 50  0001 C CNN "Description"
+F 5 "C25744" H 4725 975 50  0001 C CNN "LCSC"
+	1    4725 975 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4725 825  4725 875 
+Wire Wire Line
+	4725 1075 4725 1125
+Wire Wire Line
+	4725 1125 4675 1125
+Text Label 4675 1125 2    50   ~ 0
+BTN_RTrig
+$Comp
+L Switch:SW_Push SW10
+U 1 1 610882EA
+P 4725 1375
+F 0 "SW10" V 4775 1600 50  0000 C CNN
+F 1 "R" V 4675 1600 50  0000 C CNN
+F 2 "OOO 2021:KEY-TH_4P-L7.5-W6.8-P4.50-LS7.2" H 4725 1575 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/szlcsc/1912111437_XUNPU-TS-1002N-07526_C455134.pdf" H 4725 1575 50  0001 C CNN
+F 4 "C455134" H 4725 1375 50  0001 C CNN "LCSC"
+F 5 "SPST 50mA @ 12VDC Side operation Round Button 260gf Through Hole,6x7.5x7.5mm Tactile Switches RoHS " H 4725 1375 50  0001 C CNN "Description"
+F 6 "Switch must be facing backward" H 4725 1375 50  0001 C CNN "Note"
+	1    4725 1375
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4725 1175 4725 1125
+Connection ~ 4725 1125
+$Comp
+L power:GND #PWR0137
+U 1 1 610882F2
+P 4725 1625
+F 0 "#PWR0137" H 4725 1375 50  0001 C CNN
+F 1 "GND" H 4730 1452 50  0000 C CNN
+F 2 "" H 4725 1625 50  0001 C CNN
+F 3 "" H 4725 1625 50  0001 C CNN
+	1    4725 1625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4725 1575 4725 1625
+Wire Wire Line
+	2175 3100 2125 3100
+Text Label 2175 3325 0    50   ~ 0
+BTN_Joy_A
+$Comp
+L Device:R_Small R43
+U 1 1 61091FF7
+P 4375 2850
+F 0 "R43" H 4434 2896 50  0000 L CNN
+F 1 "10K" H 4434 2805 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 4375 2850 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 4375 2850 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 4375 2850 50  0001 C CNN "Description"
+F 5 "C25744" H 4375 2850 50  0001 C CNN "LCSC"
+	1    4375 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4375 2950 4375 3150
+Wire Wire Line
+	4375 3150 4575 3150
+$Comp
+L power:+3.3V #PWR0135
+U 1 1 61094E63
+P 4375 2650
+F 0 "#PWR0135" H 4375 2500 50  0001 C CNN
+F 1 "+3.3V" H 4390 2823 50  0000 C CNN
+F 2 "" H 4375 2650 50  0001 C CNN
+F 3 "" H 4375 2650 50  0001 C CNN
+	1    4375 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4375 2650 4375 2750
+$Comp
+L Device:R_Small R41
+U 1 1 61097C5D
+P 3900 2850
+F 0 "R41" H 3959 2896 50  0000 L CNN
+F 1 "10K" H 3959 2805 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 3900 2850 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 3900 2850 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 3900 2850 50  0001 C CNN "Description"
+F 5 "C25744" H 3900 2850 50  0001 C CNN "LCSC"
+	1    3900 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R39
+U 1 1 610985C4
+P 3300 2850
+F 0 "R39" H 3359 2896 50  0000 L CNN
+F 1 "10K" H 3359 2805 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 3300 2850 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 3300 2850 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 3300 2850 50  0001 C CNN "Description"
+F 5 "C25744" H 3300 2850 50  0001 C CNN "LCSC"
+	1    3300 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3900 2950 3900 3250
+Wire Wire Line
+	3300 2950 3300 3350
+$Comp
+L power:+3.3V #PWR0132
+U 1 1 6109BE4B
+P 3900 2650
+F 0 "#PWR0132" H 3900 2500 50  0001 C CNN
+F 1 "+3.3V" H 3915 2823 50  0000 C CNN
+F 2 "" H 3900 2650 50  0001 C CNN
+F 3 "" H 3900 2650 50  0001 C CNN
+	1    3900 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0129
+U 1 1 6109C55C
+P 3300 2650
+F 0 "#PWR0129" H 3300 2500 50  0001 C CNN
+F 1 "+3.3V" H 3315 2823 50  0000 C CNN
+F 2 "" H 3300 2650 50  0001 C CNN
+F 3 "" H 3300 2650 50  0001 C CNN
+	1    3300 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3300 2650 3300 2750
+Wire Wire Line
+	3900 2750 3900 2650
+Text Label 4325 3150 2    50   ~ 0
+BTN_Joy_A
+Wire Wire Line
+	3900 3250 4575 3250
+Text Label 3850 3250 2    50   ~ 0
+BTN_Joy_Cent
+Wire Wire Line
+	3300 3350 4575 3350
+Text Label 3250 3350 2    50   ~ 0
+BTN_Joy_B
+Wire Wire Line
+	3850 3250 3900 3250
+Connection ~ 3900 3250
+Wire Wire Line
+	3250 3350 3300 3350
+Connection ~ 3300 3350
+Wire Wire Line
+	4325 3150 4375 3150
+Connection ~ 4375 3150
+$Comp
+L Device:R_Small R45
+U 1 1 610BC95A
+P 5675 2850
+F 0 "R45" H 5734 2896 50  0000 L CNN
+F 1 "10K" H 5734 2805 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 5675 2850 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 5675 2850 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 5675 2850 50  0001 C CNN "Description"
+F 5 "C25744" H 5675 2850 50  0001 C CNN "LCSC"
+	1    5675 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5675 2950 5675 3150
+$Comp
+L power:+3.3V #PWR0139
+U 1 1 610BC961
+P 5675 2650
+F 0 "#PWR0139" H 5675 2500 50  0001 C CNN
+F 1 "+3.3V" H 5690 2823 50  0000 C CNN
+F 2 "" H 5675 2650 50  0001 C CNN
+F 3 "" H 5675 2650 50  0001 C CNN
+	1    5675 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5675 2650 5675 2750
+Text Label 5750 3150 0    50   ~ 0
+BTN_Joy_D
+Wire Wire Line
+	5350 3150 5675 3150
+Wire Wire Line
+	5675 3150 5750 3150
+Connection ~ 5675 3150
+Wire Wire Line
+	5350 3350 6200 3350
+Wire Wire Line
+	6200 3350 6200 2950
+$Comp
+L Device:R_Small R46
+U 1 1 610C5D6C
+P 6200 2850
+F 0 "R46" H 6259 2896 50  0000 L CNN
+F 1 "10K" H 6259 2805 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 6200 2850 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 6200 2850 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 6200 2850 50  0001 C CNN "Description"
+F 5 "C25744" H 6200 2850 50  0001 C CNN "LCSC"
+	1    6200 2850
+	1    0    0    -1  
+$EndComp
+Text Label 6250 3350 0    50   ~ 0
+BTN_Joy_C
+Wire Wire Line
+	6250 3350 6200 3350
+Connection ~ 6200 3350
+$Comp
+L power:+3.3V #PWR0140
+U 1 1 610C8F23
+P 6200 2650
+F 0 "#PWR0140" H 6200 2500 50  0001 C CNN
+F 1 "+3.3V" H 6215 2823 50  0000 C CNN
+F 2 "" H 6200 2650 50  0001 C CNN
+F 3 "" H 6200 2650 50  0001 C CNN
+	1    6200 2650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6200 2650 6200 2750
+Text Label 2175 3175 0    50   ~ 0
+BTN_Joy_B
+Text Label 2175 3250 0    50   ~ 0
+BTN_Joy_Cent
+Text Label 2175 3400 0    50   ~ 0
+BTN_Joy_D
+Text Label 2175 3475 0    50   ~ 0
+BTN_Joy_C
+Wire Wire Line
+	2125 3175 2175 3175
+Wire Wire Line
+	2125 3250 2175 3250
+Wire Wire Line
+	2125 3325 2175 3325
+Wire Wire Line
+	2125 3400 2175 3400
+Wire Wire Line
+	2125 3475 2175 3475
+Wire Wire Line
+	2125 3550 2175 3550
+Text Notes 575  3575 0    50   ~ 0
+I2C address: 0x74
+Wire Wire Line
+	2025 1125 2025 1175
+Wire Wire Line
+	1400 1125 1400 1175
+Wire Wire Line
+	825  1125 825  1175
+Text Label 2175 2800 0    50   ~ 0
+BTN_A
+$Comp
+L OOO_2021:TCA9539PWR U13
+U 1 1 620DADE8
+P 1750 3075
+F 0 "U13" H 1750 3890 50  0000 C CNN
+F 1 "TCA9539PWR" H 1750 3799 50  0000 C CNN
+F 2 "Package_SO:TSSOP-24_4.4x7.8mm_P0.65mm" H 1475 2375 50  0001 L CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1809192236_Texas-Instruments-TCA9539PWR_C131972.pdf" H 1675 3825 50  0001 C CNN
+F 4 "C131972" H 1475 2300 50  0001 L CNN "LCSC"
+F 5 "16 POR I?C, SMBus 400kHz TSSOP-24 Interface - I/O Expanders ROHS" H 1750 3799 50  0001 C CNN "Description"
+	1    1750 3075
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R33
+U 1 1 6211047D
+P 700 2725
+F 0 "R33" H 759 2771 50  0000 L CNN
+F 1 "10K" H 759 2680 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 700 2725 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 700 2725 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 700 2725 50  0001 C CNN "Description"
+F 5 "C25744" H 700 2725 50  0001 C CNN "LCSC"
+	1    700  2725
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	700  2500 700  2625
+Connection ~ 1325 2500
+Wire Wire Line
+	700  2825 700  2950
+Wire Wire Line
+	700  2950 1375 2950
+Wire Wire Line
+	700  2500 1000 2500
+$Comp
+L Device:R_Small R35
+U 1 1 612802B2
+P 1000 2725
+F 0 "R35" H 1059 2771 50  0000 L CNN
+F 1 "10K" H 1059 2680 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 1000 2725 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810010117_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf" H 1000 2725 50  0001 C CNN
+F 4 "10kΩ ±1% 1/16W ±100ppm/℃ 0402 Chip Resistor - Surface Mount RoHS " H 1000 2725 50  0001 C CNN "Description"
+F 5 "C25744" H 1000 2725 50  0001 C CNN "LCSC"
+	1    1000 2725
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	1000 2500 1000 2625
+Connection ~ 1000 2500
+Wire Wire Line
+	1000 2500 1325 2500
+Wire Wire Line
+	1000 2825 1000 2850
+Wire Wire Line
+	1000 2850 1375 2850
+Wire Wire Line
+	1000 2850 1000 2900
+Wire Wire Line
+	1000 2900 950  2900
+Connection ~ 1000 2850
+Text HLabel 2175 3000 2    50   Input ~ 0
+LPAD_DET
+Text HLabel 2175 2625 2    50   Input ~ 0
+VEXT_EN
+Wire Wire Line
+	2175 3625 2125 3625
+Text Label 2175 3550 0    50   ~ 0
+BTN_Start
+Wire Wire Line
+	2175 3025 2175 3000
+Wire Wire Line
+	2175 2625 2175 2650
+NoConn ~ 2175 2575
+NoConn ~ 2175 2500
+$EndSCHEMATC

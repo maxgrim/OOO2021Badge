@@ -1,0 +1,261 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 6 6
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Text Label 1000 1700 2    50   ~ 0
+I2C_SCL
+Wire Wire Line
+	1000 1700 1050 1700
+Wire Wire Line
+	1050 1225 1050 1700
+Connection ~ 1050 1700
+Wire Wire Line
+	1050 1700 2175 1700
+Wire Wire Line
+	1050 1025 1050 900 
+$Comp
+L Transistor_FET:BSS138 Q?
+U 1 1 61447540
+P 1950 1250
+AR Path="/61447540" Ref="Q?"  Part="1" 
+AR Path="/61413832/61447540" Ref="Q8"  Part="1" 
+F 0 "Q8" V 2199 1250 50  0000 C CNN
+F 1 "BSS138" V 2290 1250 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2150 1175 50  0001 L CIN
+F 3 "https://datasheet.lcsc.com/szlcsc/1909061434_SLKORMICRO-Elec-BSS138_C426569.pdf" H 1950 1250 50  0001 L CNN
+F 4 "MOSFET N Trench 50V 220mA 1.6V @ 1mA 3.5 Ω @ 220mA,10V SOT-23 RoHS " H 1950 1250 50  0001 C CNN "Description"
+F 5 "C426569" H 1950 1250 50  0001 C CNN "LCSC"
+	1    1950 1250
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	1950 900  1950 1050
+$Comp
+L Transistor_FET:BSS138 Q?
+U 1 1 6144755C
+P 2375 1600
+AR Path="/6144755C" Ref="Q?"  Part="1" 
+AR Path="/61413832/6144755C" Ref="Q9"  Part="1" 
+F 0 "Q9" V 2624 1600 50  0000 C CNN
+F 1 "BSS138" V 2715 1600 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2575 1525 50  0001 L CIN
+F 3 "https://datasheet.lcsc.com/szlcsc/1909061434_SLKORMICRO-Elec-BSS138_C426569.pdf" H 2375 1600 50  0001 L CNN
+F 4 "MOSFET N Trench 50V 220mA 1.6V @ 1mA 3.5 Ω @ 220mA,10V SOT-23 RoHS " H 2375 1600 50  0001 C CNN "Description"
+F 5 "C426569" H 2375 1600 50  0001 C CNN "LCSC"
+	1    2375 1600
+	0    -1   1    0   
+$EndComp
+Text Label 1000 1350 2    50   ~ 0
+I2C_SDA
+Wire Wire Line
+	1650 2725 1650 2675
+Wire Wire Line
+	2200 3425 2250 3425
+Wire Wire Line
+	2250 3425 2250 3475
+$Comp
+L power:GND #PWR?
+U 1 1 61493872
+P 2250 3475
+AR Path="/61493872" Ref="#PWR?"  Part="1" 
+AR Path="/61413832/61493872" Ref="#PWR0146"  Part="1" 
+F 0 "#PWR0146" H 2250 3225 50  0001 C CNN
+F 1 "GND" H 2255 3302 50  0000 C CNN
+F 2 "" H 2250 3475 50  0001 C CNN
+F 3 "" H 2250 3475 50  0001 C CNN
+	1    2250 3475
+	1    0    0    -1  
+$EndComp
+Text Label 2250 3225 0    50   ~ 0
+I2C_SDA
+Text Label 2250 3125 0    50   ~ 0
+I2C_SCL
+Text HLabel 2625 1350 2    50   Input ~ 0
+ESP_I2C_SDA
+Text HLabel 2625 1700 2    50   Input ~ 0
+ESP_I2C_SCL
+Text HLabel 1650 3325 0    50   Input ~ 0
+STEMMA_SIG
+Text HLabel 2250 2725 2    50   Input ~ 0
+LPAD_DET
+Wire Wire Line
+	2575 1700 2625 1700
+Wire Wire Line
+	2150 1350 2625 1350
+$Comp
+L OOO_2021:VEXT #PWR?
+U 1 1 613FDF7A
+P 1050 900
+AR Path="/613FDF7A" Ref="#PWR?"  Part="1" 
+AR Path="/61413832/613FDF7A" Ref="#PWR0141"  Part="1" 
+F 0 "#PWR0141" H 1275 900 20  0001 C CNN
+F 1 "VEXT" H 1050 1073 50  0000 C CNN
+F 2 "" H 1200 925 60  0001 C CNN
+F 3 "" H 1200 925 60  0001 C CNN
+	1    1050 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L OOO_2021:VEXT #PWR?
+U 1 1 613FE5CB
+P 1450 900
+AR Path="/613FE5CB" Ref="#PWR?"  Part="1" 
+AR Path="/61413832/613FE5CB" Ref="#PWR0143"  Part="1" 
+F 0 "#PWR0143" H 1675 900 20  0001 C CNN
+F 1 "VEXT" H 1450 1073 50  0000 C CNN
+F 2 "" H 1600 925 60  0001 C CNN
+F 3 "" H 1600 925 60  0001 C CNN
+	1    1450 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R_Small R?
+U 1 1 61406F90
+P 1450 1125
+AR Path="/61406F90" Ref="R?"  Part="1" 
+AR Path="/61413832/61406F90" Ref="R48"  Part="1" 
+F 0 "R48" H 1509 1171 50  0000 L CNN
+F 1 "4.7K" H 1509 1080 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 1450 1125 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810301132_UNI-ROYAL-Uniroyal-Elec-0402WGF4701TCE_C25900.pdf" H 1450 1125 50  0001 C CNN
+F 4 "1/16W ±1% 4.7kΩ ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS" H 1450 1125 50  0001 C CNN "Description"
+F 5 "C25900" H 1450 1125 50  0001 C CNN "LCSC"
+	1    1450 1125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1450 900  1450 1025
+Wire Wire Line
+	1000 1350 1450 1350
+Wire Wire Line
+	1450 1225 1450 1350
+Connection ~ 1450 1350
+Wire Wire Line
+	1450 1350 1750 1350
+$Comp
+L OOO_2021:VEXT #PWR?
+U 1 1 6140AE1A
+P 1950 900
+AR Path="/6140AE1A" Ref="#PWR?"  Part="1" 
+AR Path="/61413832/6140AE1A" Ref="#PWR0145"  Part="1" 
+F 0 "#PWR0145" H 2175 900 20  0001 C CNN
+F 1 "VEXT" H 1950 1073 50  0000 C CNN
+F 2 "" H 2100 925 60  0001 C CNN
+F 3 "" H 2100 925 60  0001 C CNN
+	1    1950 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L OOO_2021:VEXT #PWR?
+U 1 1 6140B97F
+P 2375 900
+AR Path="/6140B97F" Ref="#PWR?"  Part="1" 
+AR Path="/61413832/6140B97F" Ref="#PWR0147"  Part="1" 
+F 0 "#PWR0147" H 2600 900 20  0001 C CNN
+F 1 "VEXT" H 2375 1073 50  0000 C CNN
+F 2 "" H 2525 925 60  0001 C CNN
+F 3 "" H 2525 925 60  0001 C CNN
+	1    2375 900 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2375 1400 2375 900 
+$Comp
+L OOO_2021:VEXT #PWR?
+U 1 1 6141C8C2
+P 1425 2675
+AR Path="/6141C8C2" Ref="#PWR?"  Part="1" 
+AR Path="/61413832/6141C8C2" Ref="#PWR0142"  Part="1" 
+F 0 "#PWR0142" H 1650 2675 20  0001 C CNN
+F 1 "VEXT" H 1425 2848 50  0000 C CNN
+F 2 "" H 1575 2700 60  0001 C CNN
+F 3 "" H 1575 2700 60  0001 C CNN
+	1    1425 2675
+	1    0    0    -1  
+$EndComp
+NoConn ~ 1700 2925
+$Comp
+L Connector_Generic:Conn_02x08_Odd_Even J?
+U 1 1 61493862
+P 1900 3025
+AR Path="/61493862" Ref="J?"  Part="1" 
+AR Path="/61413832/61493862" Ref="J8"  Part="1" 
+F 0 "J8" H 1950 3542 50  0000 C CNN
+F 1 "Mount" H 1950 3451 50  0000 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_2x08_P2.54mm_Vertical" H 1900 3025 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810221927_BOOMELE-Boom-Precision-Elec-C30734_C30734.pdf" H 1900 3025 50  0001 C CNN
+F 4 "C30734" H 1900 3025 50  0001 C CNN "LCSC"
+	1    1900 3025
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1650 2725 1700 2725
+Wire Wire Line
+	2200 2725 2250 2725
+Wire Wire Line
+	2200 2825 2250 2825
+Wire Wire Line
+	2200 2925 2250 2925
+Wire Wire Line
+	2200 3325 2250 3325
+Wire Wire Line
+	2250 3125 2200 3125
+Wire Wire Line
+	2200 3025 2250 3025
+NoConn ~ 1700 3125
+NoConn ~ 1700 3025
+NoConn ~ 1700 3225
+$Comp
+L Device:R_Small R?
+U 1 1 6169B350
+P 1050 1125
+AR Path="/6169B350" Ref="R?"  Part="1" 
+AR Path="/61413832/6169B350" Ref="R47"  Part="1" 
+F 0 "R47" H 1109 1171 50  0000 L CNN
+F 1 "4.7K" H 1109 1080 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric" H 1050 1125 50  0001 C CNN
+F 3 "https://datasheet.lcsc.com/lcsc/1810301132_UNI-ROYAL-Uniroyal-Elec-0402WGF4701TCE_C25900.pdf" H 1050 1125 50  0001 C CNN
+F 4 "1/16W ±1% 4.7kΩ ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS" H 1050 1125 50  0001 C CNN "Description"
+F 5 "C25900" H 1050 1125 50  0001 C CNN "LCSC"
+	1    1050 1125
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VBUS #PWR0144
+U 1 1 6159607F
+P 1650 2675
+F 0 "#PWR0144" H 1650 2525 50  0001 C CNN
+F 1 "VBUS" H 1665 2848 50  0000 C CNN
+F 2 "" H 1650 2675 50  0001 C CNN
+F 3 "" H 1650 2675 50  0001 C CNN
+	1    1650 2675
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1425 2675 1425 2825
+Wire Wire Line
+	1700 2825 1425 2825
+Text HLabel 1650 3425 0    50   Input ~ 0
+RGB_OUT
+Wire Wire Line
+	1650 3425 1700 3425
+Wire Wire Line
+	2200 3225 2250 3225
+Wire Wire Line
+	1650 3325 1700 3325
+NoConn ~ 2250 2925
+NoConn ~ 2250 2825
+NoConn ~ 2250 3025
+NoConn ~ 2250 3325
+$EndSCHEMATC
