@@ -1,112 +1,131 @@
+import wifi
+import socketpool
+import ssl
+import adafruit_requests
+import menu
 import board
 import displayio
-import menu
-import logo
-import os
-import supervisor
+from adafruit_display_text import label, wrap_text_to_pixels
+import terminalio
 from tca9539 import TCA9539
 from adafruit_debouncer import Debouncer
+import settings
 
-supervisor.disable_autoreload()
 
-ignored_items = [".DS_Store", "._.DS_Store"]
+def connect_wifi():
+    try:
+        wifi.radio.connect(
+            ssid=settings.wifi_ssid, 
+            password=settings.wifi_psk
+        )
+        return True
+    except ConnectionError:
+        return False
 
-def start_app(args):
-    # Go into module path
-    os.chdir(args[1])
+socket_pool = socketpool.SocketPool(wifi.radio)
+request_session = adafruit_requests.Session(
+    socket_pool, ssl.create_default_context())
 
-    module = __import__("apps." + args[0])
-    my_class = getattr(module, args[0])
-    my_class.main()
-
-    # Go back to root folder
-    os.chdir("/")
-    
-    return go_to_main_menu(None)
-
-def get_apps_list():
-    apps_items = os.listdir("/apps")
-    apps_list = []
-
-    for item in sorted(apps_items):
-        if item in ignored_items:
-            continue
-
-        path = "/apps/" + item
-        stat = os.stat(path)
-
-        if stat[0] & 0x4000:
-            # Directory
-            # TODO: Read manifest
-            # - Title
-            # - BMP icon
-            # - Category (?)
-            # - Author
-            # - Description
-
-            apps_list.append({
-                "text": item, 
-                "action": start_app,
-                "args": [item, path]
-            })
-
-    return apps_list
+backdoor_header = {"X-Badge-Backdoor": "spacecows"}
 
 display = board.DISPLAY
-group = displayio.Group()
-display.show(group)
+main_group = displayio.Group()
+display.show(main_group)
 
-logo_tuple = logo.load_logo()
-logo.display_logo(group, logo_tuple, 
-    int(board.DISPLAY.width / 2 - (logo_tuple[0].width / 2)), 10)
+status_label = label.Label(terminalio.FONT, text="Connecting to WiFi...")
+status_label.anchor_point = (0.5, 0.5)
+status_label.anchored_position = (display.width / 2, display.height / 2)
+main_group.append(status_label)
 
-main_menu_group = displayio.Group()
-app_menu_group = displayio.Group()
+if not connect_wifi():
+    status_label.text = "Failed to connect! :("
+    while True:
+        pass
 
-def go_to_app_menu(args):
-    group.pop()
-    group.append(app_menu_group)
-    return 1
+status_label.text = "Downloading app list..."
+response = request_session.request(
+    "GET", 
+    "https://store.spacecows.nl/api.php",
+    headers=backdoor_header)
 
-def go_to_main_menu(args):
-    group.pop()
-    group.append(main_menu_group)
-    display.show(group)
-    return 0
+response_data = response.json()
 
-app_menu_items = get_apps_list()
+main_group.remove(status_label)
 
-main_menu_items = [
-    {"text": "Apps", "action": go_to_app_menu, "args": None},
-    {"text": "Install new apps", "action": go_to_app_menu, "args": None},
-    {"text": "Settings", "action": go_to_app_menu, "args": None},
-    {"text": "Check for updates", "action": go_to_app_menu, "args": None},
-    {"text": "About", "action": go_to_app_menu, "args": None},
-    {"text": "Deep sleep", "action": go_to_app_menu, "args": None}
-]
+appstore_data = {}
 
-app_menu = menu.Menu(app_menu_items)
-app_menu.initialize_labels(20, logo_tuple[0].height + 20)
+for (path, path_obj) in response_data["paths"].items():
+    appstore_data[path] = []
 
-for label in app_menu.labels:
-    app_menu_group.append(label)
+    if path == "usercontent":
+        for (author, author_obj) in path_obj["paths"].items():
+            for app in author_obj["apps"]:
+                appstore_data[path].append(app)
+    else:
+        for app in path_obj["apps"]:
+            appstore_data[path].append(app)
 
-main_menu = menu.Menu(main_menu_items)
-main_menu.initialize_labels(20, logo_tuple[0].height + 20)
+menu_stack = ["main_menu"]
+menus = {
+    "main_menu": menu.Menu()
+}
 
-for label in main_menu.labels:
-    main_menu_group.append(label)
+def menu_active():
+    return menus[menu_stack[-1]]
 
-group.append(main_menu_group)
+def menu_launch(name, menu):
+    menus[name] = menu
 
-menus = [main_menu, app_menu]
-current_menu = 0
+    main_group.remove(menu_active().display_group)
+    menu_stack.append(name)
+    main_group.append(menu_active().display_group)
+
+def menu_back():
+    if len(menu_stack) == 1:
+        return
+
+    main_group.remove(menu_active().display_group)
+    menu_stack.pop()
+    main_group.append(menu_active().display_group)
+
+def jump_to_app_details_menu(args):
+    app = args[0]
+
+    text = (
+        "Title:" + app["title"] + "\n" +
+        "Name:" + app["name"] + "\n" +
+        "Author:" + app["author"] + "\n" +
+        "Description:" + app["author"]
+    )
+
+    app_details_menu = menu.Menu(heading=text)
+    app_details_menu.add_label("Install", None, None)
+    app_details_menu.add_label("Back", menu_back, None)
+
+    menu_launch("app_details_menu", app_details_menu)
+
+def jump_to_category_menu(args):
+    category = args[0]
+
+    game_menu = menu.Menu()
+    for app in appstore_data[category]:
+        game_menu.add_label(
+            app["title"] + " (by " + app["author"] + ")",
+            jump_to_app_details_menu, [app])
+
+    menu_launch("game_menu", game_menu)
+
+for category in appstore_data:
+    menus["main_menu"].add_label(category, jump_to_category_menu, [category])
+
+main_group.append(menus["main_menu"].display_group)
 
 io_expander = TCA9539(board.I2C())
 down_button = Debouncer(io_expander.get_pin(9))
 up_button = Debouncer(io_expander.get_pin(12))
 center_button = Debouncer(io_expander.get_pin(10))
 a_button = Debouncer(io_expander.get_pin(4))
+b_button = Debouncer(io_expander.get_pin(5))
 
 while True:
     io_expander.gpio_update()
@@ -114,14 +133,19 @@ while True:
     up_button.update()
     center_button.update()
     a_button.update()
+    b_button.update()
 
     if down_button.fell:
-        menus[current_menu].menu_move(0)
+        menu_active().menu_down()
 
     if up_button.fell:
-        menus[current_menu].menu_move(1)
+        menu_active().menu_up()
 
     if center_button.fell or a_button.fell:
-        active_item = menus[current_menu].get_active_item()
-        action = active_item["action"]
-        current_menu = action(active_item["args"])
+        selected_item = menu_active().menu_select()
+        
+        # Call function for menu
+        selected_item["action"](selected_item["action_args"])
+    
+    if b_button.fell:
+        menu_back()
