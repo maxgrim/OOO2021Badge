@@ -1,1 +1,0 @@
-# https://learn.adafruit.com/ir-sensor/circuitpython
