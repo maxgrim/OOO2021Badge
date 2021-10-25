@@ -7,7 +7,7 @@ def main():
     display = board.DISPLAY
 
     # Load the sprite sheet (bitmap)
-    sprite_sheet, palette = adafruit_imageload.load("/bmps/led_matrices_nyancat-vertical.bmp",
+    sprite_sheet, palette = adafruit_imageload.load("bmps/led_matrices_nyancat-vertical.bmp",
                                                     bitmap=displayio.Bitmap,
                                                     palette=displayio.Palette)
 

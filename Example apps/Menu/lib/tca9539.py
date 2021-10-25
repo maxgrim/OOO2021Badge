@@ -11,9 +11,19 @@ _TCA9539_CONFIG = const(0x06)
 _OUT_BUFFER = bytearray(1)
 _IN_BUFFER = bytearray(2)
 
-_CONFIG_REGISTER = bytearray(3)
-_VALUE_REGISTER = bytearray(2)
+# Configure P02 as an output
+_CONFIG_REGISTER = bytearray(4)
+_CONFIG_REGISTER[0] = _TCA9539_CONFIG
+_CONFIG_REGISTER[1] = 0b11111011
+_CONFIG_REGISTER[2] = _TCA9539_CONFIG + 1
+_CONFIG_REGISTER[3] = 0b11111111
 
+# By default everything is off
+_GPIO_OUTPUT_REGISTER = bytearray(4)
+_GPIO_OUTPUT_REGISTER[0] = _TCA9539_GPIO_OUTPUT
+_GPIO_OUTPUT_REGISTER[1] = 0b00000000
+_GPIO_OUTPUT_REGISTER[2] = _TCA9539_GPIO_OUTPUT + 1
+_GPIO_OUTPUT_REGISTER[3] = 0b00000000
 
 # outputs
 # 2 vext_en
@@ -41,11 +51,10 @@ class TCA9539:
         self._device = i2c_device.I2CDevice(i2c, address)
         self.gpio_cache = 0
 
-        _CONFIG_REGISTER[0] = _TCA9539_CONFIG
-        _CONFIG_REGISTER[1] = 0x2
-        _CONFIG_REGISTER[2] = 0x0
-
-        self._device.write(_CONFIG_REGISTER)
+        # Set default input/outputs
+        with self._device as device:
+            device.write(_CONFIG_REGISTER, start=0, end=2)
+            device.write(_CONFIG_REGISTER, start=2, end=4)
 
     def get_pin(self, pin):
         if not 0 <= pin <= 16:
@@ -69,13 +78,11 @@ class TCA9539:
         return (_IN_BUFFER[1] << 8) | _IN_BUFFER[0]
 
     def vext_on(self, value):
-        # Then write value
         if value:
-            pass
-            # _valueRegister = _valueRegister | (1 << pin);    // and OR bit in register
+            _GPIO_OUTPUT_REGISTER[1] = 0b00000100
         else:
-            pass
-            # _valueRegister = _valueRegister & ~(1 << pin);    // AND all bits
-
-        # I2CSetValue(_address, _TCA9539_GPIO_OUTPUT    , _valueRegister_low);
-        # I2CSetValue(_address, _TCA9539_GPIO_OUTPUT + 1, _valueRegister_high);
+            _GPIO_OUTPUT_REGISTER[1] = 0b00000000
+        
+        with self._device as device:
+            device.write(_GPIO_OUTPUT_REGISTER, start=0, end=2)
+            device.write(_GPIO_OUTPUT_REGISTER, start=2, end=4)
