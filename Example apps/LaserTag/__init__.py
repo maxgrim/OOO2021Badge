@@ -14,29 +14,7 @@ from adafruit_display_text import label
 from adafruit_bitmap_font import bitmap_font
 
 
-#display stuff
-i2c_bus = board.I2C()
-rtc = adafruit_pcf8563.PCF8563(i2c_bus)
-font = bitmap_font.load_font("spacecows-32.pcf")
-font.load_glyphs(b'QWERTYUIOPLKJHGFDSAZXCVBNM')
-time_spacer = 10
-start_y = (240) - (120 + (6*time_spacer))
-
-
-IR_PIN = board.IR_RECV # Pin connected to IR receiver.
-# Create a 'pulseio' output, to send infrared signals on the IR transmitter @ 38KHz
-pulseout = pulseio.PulseOut(board.IR_SEND, frequency=38000, duty_cycle=2 ** 15)
-# Create an encoder that will take numbers and turn them into NEC IR pulses
-encoder = adafruit_irremote.GenericTransmit(header=[9500, 4500], one=[550, 550],
-                                            zero=[550, 1700], trail=0)
-
-#to be added to settings .py
-shooter_id = 4
-shooter_pulse = [1, 11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201, 211, 221, 231, 241, 251,]
-shooter_name = ["AV", "J33K0", "BERTA", "MOO!", "GRAAYNA", "FERDINAND", "BUTCHIE", "BERTHA CVXII", "BELLA", "KLEINMAARFIJN", "BENNIE ", "HUGH HEIFER", "D_COW", "PATCHES", "NO IDEA :D BILLY OR SOMETHING", "DOGUCOW", "MUU", "MOO", "COWHISPERER", "MOOMOO", "COWABUNGA", "MOUMOU", "ZERO", "COWORKER", "CELESTEA THE DESTROYER", "WILLEM 0100", "VOID", "DR. MOO", "HENK", "LEYLA THE GIGACHAD", "COWABONGA", "BOB", "NOTCOW", "COWFLANK", "HAPPYCOW", "LOETJE", "MIMI", "BETSY", "WILLEM-ALEXANDER", "SPACY", "KLARABELLA", "ASD", "MOOMOOTHERFUCKER", "CAROLINA", "BERTA", "CONNECTIE", "BLOSSOM", "HENKZILLA", "SPRINKLES ", "KLARA_6", "COW", "LARRY", "BIGMAC"]
-IR_PIN = board.IR_RECV # Pin connected to IR receiver.
-
-# Expected pulse, pasted in from previous recording REPL session:
+# Expected pulse per player, pasted in from previous recording REPL session:
 IR_RCV_0 = [9522, 4476, 549, 555, 549, 540, 561, 543, 555, 546, 555, 549, 570, 534, 573, 531, 573, 531, 573, 1671, 558, 1698, 573, 1671, 588, 1668, 573, 1689, 573, 1668, 558, 546, 531, 1728, 573, 1671, 558, 1698, 573, 1671, 588, 1668, 549, 1713, 549, 1692, 558, 1701, 573, 534, 570, 534, 573, 513, 561, 546, 555, 546, 555, 546, 534, 570, 573, 531, 573]
 IR_RCV_1 = [9510, 4491, 558, 546, 531, 570, 570, 534, 549, 555, 576, 531, 573, 531, 573, 516, 561, 543, 558, 1695, 552, 1692, 567, 1692, 534, 1725, 552, 1692, 558, 1698, 573, 534, 549, 1695, 558, 1695, 573, 1671, 567, 1692, 549, 1713, 549, 555, 573, 1668, 531, 570, 573, 531, 552, 555, 549, 555, 573, 534, 570, 519, 558, 543, 555, 549, 552, 549, 570]
 IR_RCV_2 = [9504, 4494, 552, 555, 573, 534, 546, 543, 555, 546, 555, 546, 531, 570, 549, 558, 546, 558, 573, 1671, 561, 1692, 576, 1689, 573, 1668, 531, 1728, 549, 1695, 558, 546, 552, 1704, 549, 1695, 561, 1695, 549, 1713, 549, 540, 558, 1695, 549, 558, 570, 1671, 567, 543, 555, 546, 555, 546, 531, 570, 549, 558, 549, 555, 549, 558, 546, 558, 546]
@@ -91,15 +69,39 @@ IR_RCV_50 = [9516, 4497, 573, 534, 546, 543, 558, 546, 555, 546, 552, 549, 573, 
 IR_RCV_51 = [9543, 4473, 552, 540, 561, 543, 558, 543, 558, 546, 531, 570, 570, 534, 573, 534, 570, 534, 573, 1668, 558, 1698, 552, 1692, 588, 1668, 573, 1692, 570, 1671, 555, 546, 537, 1725, 549, 1692, 558, 1698, 552, 1695, 561, 1692, 576, 531, 549, 1695, 588, 519, 558, 543, 558, 1698, 573, 1671, 564, 1695, 570, 1692, 573, 513, 564, 1689, 573, 534, 573]
 IR_RCV_52 = [9525, 4473, 573, 531, 576, 534, 570, 531, 573, 534, 570, 519, 558, 543, 558, 546, 555, 546, 537, 1722, 552, 1692, 558, 1698, 552, 1692, 564, 1692, 573, 1692, 573, 513, 588, 1668, 570, 1689, 576, 1668, 558, 1698, 576, 531, 549, 1695, 558, 543, 555, 1704, 573, 534, 570, 1671, 555, 1701, 573, 1671, 561, 1695, 573, 534, 573, 1668, 564, 546, 555]
 
+#to be added to settings .py
+shooter_id = 4
+shooter_pulse = [1, 11, 21, 31, 41, 51, 61, 71, 81, 91, 101, 111, 121, 131, 141, 151, 161, 171, 181, 191, 201, 211, 221, 231, 241, 251,]
+shooter_name = ["AV", "J33K0", "BERTA", "MOO!", "GRAAYNA", "FERDINAND", "BUTCHIE", "BERTHA CVXII", "BELLA", "KLEINMAARFIJN", "BENNIE ", "HUGH HEIFER", "D_COW", "PATCHES", "NO IDEA :D BILLY OR SOMETHING", "DOGUCOW", "MUU", "MOO", "COWHISPERER", "MOOMOO", "COWABUNGA", "MOUMOU", "ZERO", "COWORKER", "CELESTEA THE DESTROYER", "WILLEM 0100", "VOID", "DR. MOO", "HENK", "LEYLA THE GIGACHAD", "COWABONGA", "BOB", "NOTCOW", "COWFLANK", "HAPPYCOW", "LOETJE", "MIMI", "BETSY", "WILLEM-ALEXANDER", "SPACY", "KLARABELLA", "ASD", "MOOMOOTHERFUCKER", "CAROLINA", "BERTA", "CONNECTIE", "BLOSSOM", "HENKZILLA", "SPRINKLES ", "KLARA_6", "COW", "LARRY", "BIGMAC"]
+
+#display stuff
+i2c_bus = board.I2C()
+rtc = adafruit_pcf8563.PCF8563(i2c_bus)
+font = bitmap_font.load_font("spacecows-32.pcf")
+font.load_glyphs(b'QWERTYUIOPLKJHGFDSAZXCVBNM')
+time_spacer = 10
+start_y = (240) - (120 + (6*time_spacer))
+
+#initialize buttons
 io_expander = TCA9539(board.I2C())
-left_button = Debouncer(io_expander.get_pin(11))
-right_button = Debouncer(io_expander.get_pin(13))
 a_button = Debouncer(io_expander.get_pin(4))
-b_button = Debouncer(io_expander.get_pin(5))
 menu_button = Debouncer(io_expander.get_pin(15))
-down_button = Debouncer(io_expander.get_pin(9))
-up_button = Debouncer(io_expander.get_pin(12))
 center_button = Debouncer(io_expander.get_pin(10))
+
+#initiate IR 
+IR_PIN = board.IR_RECV # Pin connected to IR receiver.
+# Create a 'pulseio' output, to send infrared signals on the IR transmitter @ 38KHz
+pulseout = pulseio.PulseOut(board.IR_SEND, frequency=38000, duty_cycle=2 ** 15)
+# Create an encoder that will take numbers and turn them into NEC IR pulses
+encoder = adafruit_irremote.GenericTransmit(header=[9500, 4500], one=[550, 550],
+                                            zero=[550, 1700], trail=0)
+# Create pulse input and IR decoder.
+pulses = pulseio.PulseIn(IR_PIN, maxlen=200, idle_state=True)
+decoder = adafruit_irremote.GenericDecode()
+pulses.clear()
+pulses.resume()
+
+#compare pulses
 def fuzzy_pulse_compare(pulse1, pulse2, fuzzyness=0.2):
     if len(pulse1) != len(pulse2):
         return False
@@ -108,12 +110,7 @@ def fuzzy_pulse_compare(pulse1, pulse2, fuzzyness=0.2):
         if abs(pulse1[i] - pulse2[i]) > threshold:
             return False
     return True
-# Create pulse input and IR decoder.
-pulses = pulseio.PulseIn(IR_PIN, maxlen=200, idle_state=True)
-decoder = adafruit_irremote.GenericDecode()
-pulses.clear()
-pulses.resume()
-
+#display killer
 def display_killer(killer):
     if len(killer) > 0:
         display_label = label.Label(font, text="KILLED BY", color=0xcc3300)
@@ -129,8 +126,6 @@ def display_killer(killer):
         display_label = label.Label(font, text="ALIVE", color=0x66ff33)
         display_label.anchor_point = (0.5, 0.5)
         display_label.anchored_position = (320 / 2, start_y+time_spacer*2+name_label.height)
-        
-
     display = board.DISPLAY
     group = displayio.Group()
     group.append(display_label)
@@ -139,189 +134,191 @@ def display_killer(killer):
     group.append(display_label)
     group.append(name_label)
     
+def main():
+    while True:
+        display_killer("")
+        io_expander.gpio_update()
+        a_button.update()
+        menu_button.update()
+        # Loop waiting to receive pulses.
+        # Wait for a pulse to be detected.
+        detected = decoder.read_pulses(pulses)
+        # Got a pulse, now compare.
+        if fuzzy_pulse_compare(IR_RCV_0, detected):
+            display_killer(shooter_name[0])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_1, detected):
+            display_killer(shooter_name[1])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_2, detected):
+            display_killer(shooter_name[2])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_3, detected):
+            display_killer(shooter_name[3])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_4, detected):
+            display_killer(shooter_name[4])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_5, detected):
+            display_killer(shooter_name[5])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_6, detected):
+            display_killer(shooter_name[6])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_7, detected):
+            display_killer(shooter_name[7])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_8, detected):
+            display_killer(shooter_name[8])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_9, detected):
+            display_killer(shooter_name[9])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_10, detected):
+            display_killer(shooter_name[10])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_11, detected):
+            display_killer(shooter_name[11])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_12, detected):
+            display_killer(shooter_name[12])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_13, detected):
+            display_killer(shooter_name[13])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_14, detected):
+            display_killer(shooter_name[14])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_15, detected):
+            display_killer(shooter_name[15])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_16, detected):
+            display_killer(shooter_name[16])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_17, detected):
+            display_killer(shooter_name[17])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_18, detected):
+            display_killer(shooter_name[18])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_19, detected):
+            display_killer(shooter_name[19])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_20, detected):
+            display_killer(shooter_name[20])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_21, detected):
+            display_killer(shooter_name[21])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_22, detected):
+            display_killer(shooter_name[22])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_23, detected):
+            display_killer(shooter_name[23])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_24, detected):
+            display_killer(shooter_name[24])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_25, detected):
+            display_killer(shooter_name[25])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_26, detected):
+            display_killer(shooter_name[26])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_27, detected):
+            display_killer(shooter_name[27])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_28, detected):
+            display_killer(shooter_name[28])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_29, detected):
+            display_killer(shooter_name[29])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_30, detected):
+            display_killer(shooter_name[30])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_31, detected):
+            display_killer(shooter_name[31])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_32, detected):
+            display_killer(shooter_name[32])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_33, detected):
+            display_killer(shooter_name[33])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_34, detected):
+            display_killer(shooter_name[34])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_35, detected):
+            display_killer(shooter_name[35])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_36, detected):
+            display_killer(shooter_name[36])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_37, detected):
+            display_killer(shooter_name[37])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_38, detected):
+            display_killer(shooter_name[38])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_39, detected):
+            display_killer(shooter_name[39])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_40, detected):
+            display_killer(shooter_name[40])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_41, detected):
+            display_killer(shooter_name[41])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_42, detected):
+            display_killer(shooter_name[42])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_43, detected):
+            display_killer(shooter_name[43])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_44, detected):
+            display_killer(shooter_name[44])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_45, detected):
+            display_killer(shooter_name[45])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_46, detected):
+            display_killer(shooter_name[46])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_47, detected):
+            display_killer(shooter_name[47])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_48, detected):
+            display_killer(shooter_name[48])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_49, detected):
+            display_killer(shooter_name[49])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_50, detected):
+            display_killer(shooter_name[50])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_51, detected):
+            display_killer(shooter_name[51])
+            time.sleep(5)
+        if fuzzy_pulse_compare(IR_RCV_52, detected):
+            display_killer(shooter_name[52])
+            time.sleep(5)
 
-while True:
-    display_killer("")
-    io_expander.gpio_update()
-    a_button.update()
-    # Loop waiting to receive pulses.
-    # Wait for a pulse to be detected.
-    detected = decoder.read_pulses(pulses)
-    # Got a pulse, now compare.
-    if fuzzy_pulse_compare(IR_RCV_0, detected):
-        display_killer(shooter_name[0])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_1, detected):
-        display_killer(shooter_name[1])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_2, detected):
-        display_killer(shooter_name[2])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_3, detected):
-        display_killer(shooter_name[3])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_4, detected):
-        display_killer(shooter_name[4])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_5, detected):
-        display_killer(shooter_name[5])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_6, detected):
-        display_killer(shooter_name[6])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_7, detected):
-        display_killer(shooter_name[7])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_8, detected):
-        display_killer(shooter_name[8])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_9, detected):
-        display_killer(shooter_name[9])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_10, detected):
-        display_killer(shooter_name[10])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_11, detected):
-        display_killer(shooter_name[11])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_12, detected):
-        display_killer(shooter_name[12])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_13, detected):
-        display_killer(shooter_name[13])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_14, detected):
-        display_killer(shooter_name[14])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_15, detected):
-        display_killer(shooter_name[15])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_16, detected):
-        display_killer(shooter_name[16])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_17, detected):
-        display_killer(shooter_name[17])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_18, detected):
-        display_killer(shooter_name[18])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_19, detected):
-        display_killer(shooter_name[19])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_20, detected):
-        display_killer(shooter_name[20])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_21, detected):
-        display_killer(shooter_name[21])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_22, detected):
-        display_killer(shooter_name[22])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_23, detected):
-        display_killer(shooter_name[23])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_24, detected):
-        display_killer(shooter_name[24])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_25, detected):
-        display_killer(shooter_name[25])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_26, detected):
-        display_killer(shooter_name[26])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_27, detected):
-        display_killer(shooter_name[27])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_28, detected):
-        display_killer(shooter_name[28])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_29, detected):
-        display_killer(shooter_name[29])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_30, detected):
-        display_killer(shooter_name[30])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_31, detected):
-        display_killer(shooter_name[31])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_32, detected):
-        display_killer(shooter_name[32])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_33, detected):
-        display_killer(shooter_name[33])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_34, detected):
-        display_killer(shooter_name[34])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_35, detected):
-        display_killer(shooter_name[35])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_36, detected):
-        display_killer(shooter_name[36])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_37, detected):
-        display_killer(shooter_name[37])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_38, detected):
-        display_killer(shooter_name[38])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_39, detected):
-        display_killer(shooter_name[39])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_40, detected):
-        display_killer(shooter_name[40])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_41, detected):
-        display_killer(shooter_name[41])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_42, detected):
-        display_killer(shooter_name[42])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_43, detected):
-        display_killer(shooter_name[43])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_44, detected):
-        display_killer(shooter_name[44])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_45, detected):
-        display_killer(shooter_name[45])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_46, detected):
-        display_killer(shooter_name[46])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_47, detected):
-        display_killer(shooter_name[47])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_48, detected):
-        display_killer(shooter_name[48])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_49, detected):
-        display_killer(shooter_name[49])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_50, detected):
-        display_killer(shooter_name[50])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_51, detected):
-        display_killer(shooter_name[51])
-        time.sleep(5)
-    if fuzzy_pulse_compare(IR_RCV_52, detected):
-        display_killer(shooter_name[52])
-        time.sleep(5)
-
-    if center_button.fell or a_button.fell:
-        if shooter_id < 25:
-            print(shooter_id)
-            encoder.transmit(pulseout, [255, 2, shooter_pulse[shooter_id], 255])
+        if center_button.fell or a_button.fell:
+            if shooter_id < 25:
+                print(shooter_id)
+                encoder.transmit(pulseout, [255, 2, shooter_pulse[shooter_id], 255])
+                time.sleep(0.2)
+            if shooter_id > 24 and shooter_id <49 :
+                print(shooter_id)
+                encoder.transmit(pulseout, [255, 2, shooter_pulse[shooter_id-24], 100])
+                time.sleep(0.2)
+            if shooter_id > 48 and shooter_id <53:
+                print(shooter_id)
+                encoder.transmit(pulseout, [255, 2, shooter_pulse[shooter_id-50], 10])
+                time.sleep(0.2)
+            # wait so the receiver can get the full message
             time.sleep(0.2)
-        if shooter_id > 24 and shooter_id <49 :
-            print(shooter_id)
-            encoder.transmit(pulseout, [255, 2, shooter_pulse[shooter_id-24], 100])
-            time.sleep(0.2)
-        if shooter_id > 48 and shooter_id <53:
-            print(shooter_id)
-            encoder.transmit(pulseout, [255, 2, shooter_pulse[shooter_id-50], 10])
-            time.sleep(0.2)
-        # wait so the receiver can get the full message
-        time.sleep(0.2)
-    
+        if menu_button.fell:
+            return
 

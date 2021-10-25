@@ -2,11 +2,17 @@ import time
 import board
 import displayio
 import adafruit_imageload
+from tca9539 import TCA9539
+from adafruit_debouncer import Debouncer
 
 display = board.DISPLAY
 
+#Button handler
+io_expander = TCA9539(board.I2C())
+menu_button = Debouncer(io_expander.get_pin(15))
+
 # Load the sprite sheet (bitmap)
-sprite_sheet, palette = adafruit_imageload.load("bmps/led_matrices_parrot-vertical.bmp",
+sprite_sheet, palette = adafruit_imageload.load("apps/Parrot/bmps/led_matrices_parrot-vertical.bmp",
                                                 bitmap=displayio.Bitmap,
                                                 palette=displayio.Palette)
 
@@ -32,7 +38,12 @@ group.y = 60
 
 # Loop through each sprite in the sprite sheet
 source_index = 0
-while True:
-    sprite[0] = source_index % 6
-    source_index += 1
-    time.sleep(0.075)
+def main():
+    while True:
+        io_expander.gpio_update()
+        menu_button.update()
+        sprite[0] = source_index % 6
+        source_index += 1
+        time.sleep(0.075)
+        if menu_button.fell:
+            return
