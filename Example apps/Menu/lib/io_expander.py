@@ -58,7 +58,7 @@ class DigitalInOut:
         return digitalio.Direction.OUTPUT
 
 
-class TCA9539:
+class IOExpander:
     def __init__(self, i2c, address=_TCA9539_ADDR):
         self._device = i2c_device.I2CDevice(i2c, address)
         self.gpio_cache = 0
@@ -68,18 +68,18 @@ class TCA9539:
             device.write(_CONFIG_REGISTER, start=0, end=2)
             device.write(_CONFIG_REGISTER, start=2, end=4)
 
-        self.button_rtrigger = Debouncer(self.get_pin(3))
-        self.button_a = Debouncer(self.get_pin(4))
-        self.button_b = Debouncer(self.get_pin(5))
-        self.button_select = Debouncer(self.get_pin(6))
-        self.button_ltrigger = Debouncer(self.get_pin(8))
-        self.button_down = Debouncer(self.get_pin(9))
-        self.button_center = Debouncer(self.get_pin(10))
-        self.button_left = Debouncer(self.get_pin(11))
-        self.button_up = Debouncer(self.get_pin(12))
-        self.button_right = Debouncer(self.get_pin(13))
-        self.button_start = Debouncer(self.get_pin(14))
-        self.button_menu = Debouncer(self.get_pin(15))
+        self.button_rtrigger = Debouncer(self.get_pin(PIN_BUTTON_RTRIGGER))
+        self.button_a = Debouncer(self.get_pin(PIN_BUTTON_A))
+        self.button_b = Debouncer(self.get_pin(PIN_BUTTON_B))
+        self.button_select = Debouncer(self.get_pin(PIN_BUTTON_SELECT))
+        self.button_ltrigger = Debouncer(self.get_pin(PIN_BUTTON_LTRIGGER))
+        self.button_down = Debouncer(self.get_pin(PIN_BUTTON_DOWN))
+        self.button_center = Debouncer(self.get_pin(PIN_BUTTON_CENTER))
+        self.button_left = Debouncer(self.get_pin(PIN_BUTTON_LEFT))
+        self.button_up = Debouncer(self.get_pin(PIN_BUTTON_UP))
+        self.button_right = Debouncer(self.get_pin(PIN_BUTTON_RIGHT))
+        self.button_start = Debouncer(self.get_pin(PIN_BUTTON_START))
+        self.button_menu = Debouncer(self.get_pin(PIN_BUTTON_MENU))
 
         self.button_list = [
             self.button_rtrigger, self.button_a, self.button_b,

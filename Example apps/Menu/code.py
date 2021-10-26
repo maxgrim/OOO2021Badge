@@ -1,7 +1,7 @@
 import board
 import displayio
 import menu
-from tca9539 import TCA9539
+from io_expander import IOExpander
 import about
 import logo
 import appstore
@@ -36,7 +36,7 @@ root_menu.add_entry(menu.MenuLabelEntry("About", run_and_display_group, {
 d_group_root.append(root_menu.display_group)
 menu_collection = menu.MenuCollection(root_menu)
 
-io_expander = TCA9539(board.I2C())
+io_expander = IOExpander(board.I2C())
 
 while True:
     io_expander.update()

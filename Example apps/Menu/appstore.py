@@ -114,7 +114,7 @@ def run_store(_):
 #     response = request_session.request(
 #         "GET", 
 #         url,
-#         headers=backdoor_header)
+#         headers=backdoor_header
 #     response_data = response.json()
 
 #     existing_apps = os.listdir("/apps")
