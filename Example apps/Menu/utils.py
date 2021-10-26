@@ -1,4 +1,6 @@
 import os
+import board
+
 
 ignored_items = [".DS_Store", "._.DS_Store"]
 
@@ -46,3 +48,7 @@ def delete_folder_recursive(path):
         else:
             os.remove(current_path)
     os.rmdir(path)
+
+def run_then_display_show(args):
+    args["action"](args["action_args"])
+    board.DISPLAY.show(args["display_group"])
