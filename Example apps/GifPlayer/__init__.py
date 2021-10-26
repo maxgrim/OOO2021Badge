@@ -2,6 +2,10 @@ import time
 import board
 import displayio
 import adafruit_imageload
+from io_expander import IOExpander
+
+#Button handler
+io_expander = IOExpander(board.I2C())
 
 def main():
     display = board.DISPLAY
@@ -34,6 +38,9 @@ def main():
     # Loop through each sprite in the sprite sheet
     source_index = 0
     while True:
+        io_expander.update()
         sprite[0] = source_index % 6
         source_index += 1
         time.sleep(0.075)
+        if io_expander.button_menu.fell:
+            return
