@@ -7,12 +7,28 @@ import board
 import displayio
 from adafruit_display_text import label
 import terminalio
-from tca9539 import TCA9539
+from io_expander import IOExpander
 import settings
 import storage
+import os
+import utils
 
 
 backdoor_header = {"X-Badge-Backdoor": "spacecows"}
+
+root_menu = menu.Menu()
+menu_collection = menu.MenuCollection(root_menu)
+d_group_root = displayio.Group()
+
+status_label = label.Label(terminalio.FONT, text="Loading...")
+status_label.anchor_point = (0.5, 0.5)
+status_label.anchored_position = (board.DISPLAY.width / 2, board.DISPLAY.height / 2)
+
+appstore_data = {}
+
+socket_pool = None
+request_session = None
+
 
 def connect_wifi():
     try:
@@ -24,18 +40,106 @@ def connect_wifi():
     except ConnectionError:
         return False
 
+def install_app(args):
+    app = args["app"]
+
+    url = "{0}/api.php?path={1}&act=getapp&name={2}".format(
+        settings.appstore_base_url,
+        app["path"],
+        app["name"]
+    )
+
+    response = request_session.request(
+        "GET", 
+        url,
+        headers=backdoor_header)
+    response_data = response.json()
+
+    existing_apps = os.listdir("/apps")
+    if app["name"] in existing_apps:
+        print("app exists, removing")
+        utils.delete_folder_recursive("/apps/" + app["name"])
+    
+    print("creating directory {0}/{1}".format("/apps", app["name"]))
+    os.mkdir("{0}/{1}".format("/apps", app["name"]))
+
+    for file_entry in response_data["filelist"]:
+        if file_entry["type"] != "folder":
+            continue
+
+        print("creating directory {0}/{1}/{2}".format("/apps", app["name"], file_entry["relpath"]))
+        os.mkdir("{0}/{1}/{2}".format("/apps", app["name"], file_entry["relpath"]))
+    
+    os.sync()
+
+    for file_entry in response_data["filelist"]:
+        print("Contents for " + file_entry["relpath"])
+        if file_entry["type"] == "file":
+            url = "{0}/{1}".format(
+                settings.appstore_base_url,
+                file_entry["path"],
+                app["path"]
+            )
+
+            response = request_session.request(
+                "GET", 
+                url,
+                headers=backdoor_header)
+
+            print("Creating /apps/{0}/{1}".format(app["name"], file_entry["relpath"]))
+
+            f = open("/apps/" + app["name"] + "/" + file_entry["relpath"], "wb")
+            f.write(response.content)
+            f.close()
+    
+    os.sync()
+
+
+def build_category_menu(args):
+    d_group_root.pop()
+
+    category_menu = menu.Menu()
+    
+    for app in appstore_data[args["category_name"]]:
+        category_menu.add_entry(menu.MenuLabelEntry(app["title"], install_app, {"app": app}))
+    
+    menu_collection.push_menu(category_menu, "category_menu")
+    d_group_root.append(menu_collection.active_menu.display_group)
+    pass
+
+def get_appstore_data():
+    status_label.text = "Downloading app list..."
+    response = request_session.request(
+        "GET", 
+        "https://store.spacecows.nl/api.php",
+        headers=backdoor_header)
+
+    response_data = response.json()
+
+    for (path, path_obj) in response_data["paths"].items():
+        appstore_data[path] = []
+
+        if path == "usercontent":
+            for (author, author_obj) in path_obj["paths"].items():
+                for app in author_obj["apps"]:
+                    app["path"] = "{0}/{1}".format(path, author)
+                    appstore_data[path].append(app)
+        else:
+            for app in path_obj["apps"]:
+                app["path"] = path
+                appstore_data[path].append(app)
+
 
 def run_store(_):
-    io_expander = TCA9539(board.I2C())
+    global socket_pool, request_session
+
+    socket_pool = socketpool.SocketPool(wifi.radio)
+    request_session = adafruit_requests.Session(
+        socket_pool, ssl.create_default_context())
+    io_expander = IOExpander(board.I2C())
 
     display = board.DISPLAY
-    d_group_root = displayio.Group()
-
-    status_label = label.Label(terminalio.FONT, text="Loading...")
-    status_label.anchor_point = (0.5, 0.5)
-    status_label.anchored_position = (display.width / 2, display.height / 2)
     d_group_root.append(status_label)
-
     display.show(d_group_root)
 
     try:
@@ -53,40 +157,15 @@ def run_store(_):
         while True:
             pass
 
-    socket_pool = socketpool.SocketPool(wifi.radio)
-    request_session = adafruit_requests.Session(
-        socket_pool, ssl.create_default_context())
-
-    status_label.text = "Downloading app list..."
-    response = request_session.request(
-        "GET", 
-        "https://store.spacecows.nl/api.php",
-        headers=backdoor_header)
-
-    response_data = response.json()
-    d_group_root.remove(status_label)
-
-    appstore_data = {}
-
-    for (path, path_obj) in response_data["paths"].items():
-        appstore_data[path] = []
-
-        if path == "usercontent":
-            for (author, author_obj) in path_obj["paths"].items():
-                for app in author_obj["apps"]:
-                    app["path"] = "{0}/{1}".format(path, author)
-                    appstore_data[path].append(app)
-        else:
-            for app in path_obj["apps"]:
-                app["path"] = path
-                appstore_data[path].append(app)
-
-    root_menu = menu.Menu()
-    d_group_root.append(root_menu.display_group)
-    menu_collection = menu.MenuCollection(root_menu)
+    get_appstore_data()
 
     for category in appstore_data:
-        root_menu.add_entry(menu.MenuLabelEntry(category, None, None))
+        root_menu.add_entry(menu.MenuLabelEntry(category, build_category_menu, {
+            "category_name": category
+        }))
+
+    d_group_root.remove(status_label)
+    d_group_root.append(root_menu.display_group)
 
     while True:
         io_expander.update()
@@ -97,64 +176,10 @@ def run_store(_):
         if io_expander.button_up.fell:
             menu_collection.active_menu.move_up()
 
-        if io_expander.button_menu.fell:
-            return
+        if io_expander.button_center.fell or io_expander.button_a.fell:
+            selected_item = menu_collection.active_menu.selected_item
+            selected_item.execute_action()
 
-
-# def install_app(args):
-#     app = args[0]
-#     print(app)
-
-#     url = "{0}/api.php?path={1}&act=getapp&name={2}".format(
-#         settings.base_url,
-#         app["path"],
-#         app["name"]
-#     )
-
-#     response = request_session.request(
-#         "GET", 
-#         url,
-#         headers=backdoor_header
-#     response_data = response.json()
-
-#     existing_apps = os.listdir("/apps")
-#     if app["name"] in existing_apps:
-#         print("app exists, removing")
-#         utils.delete_folder_recursive("/apps/" + app["name"])
-    
-#     print("creating directory {0}/{1}".format("/apps", app["name"]))
-#     os.mkdir("{0}/{1}".format("/apps", app["name"]))
-
-#     for file_entry in response_data["filelist"]:
-#         if file_entry["type"] != "folder":
-#             continue
-
-#         print("creating directory {0}/{1}/{2}".format("/apps", app["name"], file_entry["relpath"]))
-#         os.mkdir("{0}/{1}/{2}".format("/apps", app["name"], file_entry["relpath"]))
-    
-#     os.sync()
-
-#     for file_entry in response_data["filelist"]:
-#         print("Contents for " + file_entry["relpath"])
-#         if file_entry["type"] == "file":
-#             url = "{0}/{1}".format(
-#                 settings.base_url,
-#                 file_entry["path"],
-#                 app["path"]
-#             )
-
-#             response = request_session.request(
-#                 "GET", 
-#                 url,
-#                 headers=backdoor_header)
-
-#             print("Creating /apps/{0}/{1}".format(app["name"], file_entry["relpath"]))
-
-#             f = open("/apps/" + app["name"] + "/" + file_entry["relpath"], "wb")
-#             f.write(response.content)
-#             f.close()
-    
-#     os.sync()
 
 # # def jump_to_app_details_menu(args):
 # #     app = args[0]

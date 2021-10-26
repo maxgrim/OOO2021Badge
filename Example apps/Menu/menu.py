@@ -32,6 +32,10 @@ class MenuCollection:
     @property
     def active_menu(self):
         return self.menus[self.menu_stack[-1]]
+    
+    def push_menu(self, menu, menu_name):
+        self.menus[menu_name] = menu
+        self.menu_stack.append(menu_name)
 
 
 class Menu:
