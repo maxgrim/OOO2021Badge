@@ -1,8 +1,6 @@
 import os
 
-
 ignored_items = [".DS_Store", "._.DS_Store"]
-
 
 def start_app(args):
     # Go into module path
@@ -37,3 +35,14 @@ def get_apps_list(end_callback):
             })
 
     return apps_list
+
+def delete_folder_recursive(path):
+    for file in os.listdir(path):
+        current_path = path + "/" + file
+
+        stat = os.stat(current_path)
+        if stat[0] & 0x4000:
+            delete_folder_recursive(current_path)
+        else:
+            os.remove(current_path)
+    os.rmdir(path)

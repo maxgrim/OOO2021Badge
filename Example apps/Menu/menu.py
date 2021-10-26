@@ -4,64 +4,91 @@ import terminalio
 import displayio
 
 
+class MenuCheckboxEntry:
+    def __init__(self, text):
+        pass
+
+
+class MenuLabelEntry:
+    def __init__(self, text, action, action_args_dict):
+        self.text = text
+        self.action = action
+        self.action_args_dict = action_args_dict
+
+        self.label = label.Label(terminalio.FONT, \
+            text=text, color=0xFFFFFF)
+
+    def execute_action(self):
+        self.action(self.action_args_dict)
+
+
+class MenuCollection:
+    def __init__(self, root_menu):
+        self.menu_stack = ["root"]
+        self.menus = {
+            "root": root_menu
+        }
+    
+    @property
+    def active_menu(self):
+        return self.menus[self.menu_stack[-1]]
+
+
 class Menu:
-    def __init__(self, heading=None):
-        self.items = []
+    def __init__(self, start_x=10, start_y=10, heading=None):
+        self.entries = []
         self.display_group = displayio.Group()
 
-        self.start_y = 0
+        self.start_x = start_x
+        self.start_y = start_y
 
         if heading is not None:
             heading_label = label.Label(
                 terminalio.FONT,
                 text="\n".join(wrap_text_to_pixels(
-                    heading, 300, terminalio.FONT))
-                )
+                    heading, 300, terminalio.FONT)),
+                color=0x00FF00
+            )
             
             heading_label.anchor_point = (0.0, 0.0)
-            heading_label.anchored_position = (20, 20)
+            heading_label.anchored_position = \
+                (self.start_x, self.start_y)
 
             self.display_group.append(heading_label)
             self.start_y = self.start_y + \
                 heading_label.y + heading_label.height
 
         self.active_index = 0
-        self.active_label = label.Label(terminalio.FONT, \
+        self.active_indicator = label.Label(terminalio.FONT, \
             text=">", color=0xFF0000)
-        self.active_label.anchor_point = (0.0, 0.0)
-        self.display_group.append(self.active_label)
+        self.active_indicator.anchor_point = (0.0, 0.0)
+        self.display_group.append(self.active_indicator)
 
-        self.update_active_label()
+        self.update_active_indicator()
+
+    def add_entry(self, entry):
+        # Correct placement
+        entry.label.anchor_point = (0.0, 0.0)
+        entry.label.anchored_position = \
+            (20, self.start_y + 21 * len(self.entries))
         
-    def update_active_label(self):
-        self.active_label.anchored_position = \
+        self.entries.append(entry)
+        self.display_group.append(entry.label)
+
+    def move_up(self):
+        self.active_index = self.active_index - 1
+        self.active_index %= len(self.entries)
+        self.update_active_indicator()
+
+    def move_down(self):
+        self.active_index = self.active_index + 1
+        self.active_index %= len(self.entries)
+        self.update_active_indicator()
+
+    def update_active_indicator(self):
+        self.active_indicator.anchored_position = \
             (5, self.start_y + self.active_index * 21)
 
-    def add_label(self, text, action, action_args):
-        menu_label = label.Label(terminalio.FONT, \
-            text=text, color=0xFFFFFF)
-        menu_label.anchor_point = (0.0, 0.0)
-        menu_label.anchored_position = \
-            (20, self.start_y + 21 * len(self.items))
-
-        self.items.append({
-            "text": text,
-            "action": action,
-            "action_args": action_args,
-            "label": menu_label
-        })
-
-        self.display_group.append(menu_label)
-
-    def menu_up(self):
-        self.active_index = self.active_index - 1
-        self.active_index %= len(self.items)
-        self.update_active_label()
-
-    def menu_down(self):
-        self.active_index = self.active_index + 1
-        self.active_index %= len(self.items)
-        self.update_active_label()
-
-    def menu_select(self):
-        return self.items[self.active_index]
+    @property
+    def selected_item(self):
+        return self.entries[self.active_index]

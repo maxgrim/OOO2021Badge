@@ -1,3 +1,0 @@
-Adafruit CircuitPython 7.0.0-189-g109971698-dirty on 2021-10-12; Kaluga 1 with ESP32S2
-Board ID:espressif_kaluga_1.3
-boot.py output:
