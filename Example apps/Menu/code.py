@@ -1,11 +1,14 @@
 import board
 import displayio
 import menu
-from io_expander import IOExpander
 import about
 import logo
 import appstore
 import utils
+import time
+import settings
+
+from io_expander import IOExpander
 
 
 display = board.DISPLAY
@@ -14,8 +17,14 @@ display.show(d_group_root)
 
 logo_height = logo.display_logo(d_group_root, display.width / 2, 25)
 
+def go_menu_back():
+    # Remove the last menu
+    d_group_root.pop()
+    menu_collection.pop_menu()
+    d_group_root.append(menu_collection.active_menu.display_group)
+
 def build_apps_menu(_):
-    # Hide the last menu
+    # Remove the last menu
     d_group_root.pop()
 
     apps_menu = menu.Menu()
@@ -51,8 +60,13 @@ menu_collection = menu.MenuCollection(root_menu)
 
 io_expander = IOExpander(board.I2C())
 
+last_button_time = time.monotonic()
+
 while True:
     io_expander.update()
+
+    if io_expander.any_button_fell:
+        last_button_time = time.monotonic()
 
     if io_expander.button_down.fell:
         menu_collection.active_menu.move_down()
@@ -63,3 +77,11 @@ while True:
     if io_expander.button_center.fell or io_expander.button_a.fell:
         selected_item = menu_collection.active_menu.selected_item
         selected_item.execute_action()
+
+    if io_expander.button_menu.fell:
+        go_menu_back()
+
+    if time.monotonic() > last_button_time + settings.screensaver_timeout:
+        utils.screensaver()
+        last_button_time = time.monotonic()
+        display.show(d_group_root)

@@ -95,7 +95,7 @@ def install_app(args):
 
 
 def build_category_menu(args):
-    # Hide the last menu
+    # Remove the last menu
     d_group_root.pop()
 
     category_menu = menu.Menu()

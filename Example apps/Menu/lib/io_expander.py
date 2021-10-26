@@ -94,6 +94,13 @@ class IOExpander:
             raise ValueError("Pin number must be 0-16.")
         return DigitalInOut(pin, self)
 
+    @property
+    def any_button_fell(self):
+        for button in self.button_list:
+            if button.fell:
+                return True
+        return False
+
     def update(self):
         self.gpio_cache = self._read_u16le(_TCA9539_GPIO_INPUT)
         for button in self.button_list:

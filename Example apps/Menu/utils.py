@@ -1,5 +1,10 @@
 import os
 import board
+import adafruit_imageload
+import displayio
+import random
+
+from io_expander import IOExpander
 
 
 ignored_items = [".DS_Store", "._.DS_Store"]
@@ -50,3 +55,56 @@ def delete_folder_recursive(path):
 def run_then_display_show(args):
     args["action"](args["action_args"])
     board.DISPLAY.show(args["display_group"])
+
+
+def screensaver():
+    io_expander = IOExpander(board.I2C())
+    
+    display = board.DISPLAY
+
+    # Load the sprite sheet (bitmap)
+    niels, niels_p = adafruit_imageload.load("img/niels.bmp",
+        bitmap=displayio.Bitmap,
+        palette=displayio.Palette)
+
+    niels_p.make_transparent(0)
+
+    # Create a sprite (tilegrid)
+    sprite = displayio.TileGrid(niels, pixel_shader=niels_p)
+
+    # Create a Group to hold the sprite
+    group = displayio.Group()
+
+    # Add the sprite to the Group
+    group.append(sprite)
+
+    # Add the Group to the Display
+    display.show(group)
+
+    # Set sprite location
+    group.x = random.randint(0, display.width - niels.width)
+    group.y = random.randint(0, display.height - niels.height)
+
+    x_speed = 1
+    y_speed = 1
+
+    while True:
+        # Because of potential delays x2
+        io_expander.update()
+
+        if io_expander.any_button_fell:
+            return
+        
+        group.x += x_speed
+        group.y += y_speed
+
+        # Because of potential delays x2
+        io_expander.update()
+
+        if io_expander.any_button_fell:
+            return
+
+        if (group.x + niels.width >= display.width) or (group.x <= 0):
+            x_speed = -x_speed
+        if (group.y + niels.height >= display.height) or (group.y <= 0):
+            y_speed = -y_speed

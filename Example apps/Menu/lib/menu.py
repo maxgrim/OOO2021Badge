@@ -37,6 +37,9 @@ class MenuCollection:
         self.menus[menu_name] = menu
         self.menu_stack.append(menu_name)
 
+    def pop_menu(self):
+        last_menu = self.menu_stack.pop()
+        del self.menus[last_menu]
 
 class Menu:
     def __init__(self, start_x=10, start_y=10, heading=None):
