@@ -5,16 +5,15 @@
 # This file is the "Space Aliens" game
 #   for CircuitPython
 
-#import ugame
 import stage
 import board
-#import neopixel
 import time
 import random
 import constants
 import supervisor
-from tca9539 import TCA9539
-from adafruit_debouncer import Debouncer
+from io_expander import IOExpander
+
+io_expander = IOExpander(board.I2C())
 
 def splash_scene():
     # this function is the splash scene game loop
@@ -37,8 +36,6 @@ def splash_scene():
     while True:
         # get user input
 
-        # update game logic
-        #print("Splash finished. Entering game")
         # Wait for 1 seconds
         time.sleep(1.0)
         menu_scene()
@@ -107,15 +104,11 @@ def menu_scene():
     # render the background and inital location of sprite list
     # most likely you will only render background once per scene
     game.render_block()
-    io_expander = TCA9539(board.I2C())
-    start_button = Debouncer(io_expander.get_pin(14))
     # repeat forever, game loop
     while True:
         # get user input
-        io_expander.gpio_update()
-        start_button.update()
-
-        if start_button.fell:
+        io_expander.update()
+        if io_expander.button_start.fell:
             game_scene()
             break  
 
@@ -134,15 +127,6 @@ def game_scene():
                 aliens[alien_number].move(random.randint(0 + constants.SPRITE_SIZE, constants.SCREEN_X - constants.SPRITE_SIZE), constants.OFF_TOP_SCREEN)
                 break
 
-    # buttons declaration
- 
-    io_expander = TCA9539(board.I2C())
-    left_button = Debouncer(io_expander.get_pin(11))
-    right_button = Debouncer(io_expander.get_pin(13))
-    a_button = Debouncer(io_expander.get_pin(4))
-    b_button = Debouncer(io_expander.get_pin(5))
-    menu_button = Debouncer(io_expander.get_pin(15))
-
     # an image bank for CircuitPython
     image_bank_1 = stage.Bank.from_bmp16("space_aliens.bmp")
     # a list of sprites that will be updated every frame
@@ -153,18 +137,6 @@ def game_scene():
     for laser_number in range(constants.TOTAL_NUMBER_OF_LASERS):
         a_single_laser = stage.Sprite(image_bank_1, 10, constants.OFF_SCREEN_X, constants.OFF_SCREEN_X)
         lasers.append(a_single_laser)
-
-    # set up the display to match the # of lasers fired
-    #laser_text = stage.Text(width=29, height=14, font=None, palette=constants.SCORE_PALETTE, buffer=None)
-    #laser_text.clear()
-    #laser_text.cursor(0, 0)
-    #laser_text.move(1, 10)
-    #laser_text.text("Laser: {0}".format(laser_number))
-    
-    #pixels = 5
-    #for pixel_number in range(0, 5):
-    #    pixels[pixel_number] = (0, 10, 0)
-    #pixels.show()
 
     # create aliens
     aliens = []
@@ -205,13 +177,9 @@ def game_scene():
 
     # repeat forever, game loop
     while True:
-        io_expander.gpio_update()
-        left_button.update()
-        right_button.update()
-        a_button.update()
-        menu_button.update()
+        io_expander.update()
 
-        if right_button.value:
+        if io_expander.button_right.value:
         #if ship moves off right screen, move it back
              if ship.x > constants.SCREEN_X - constants.SPRITE_SIZE:
                  ship.x = constants.SCREEN_X - constants.SPRITE_SIZE
@@ -219,37 +187,28 @@ def game_scene():
              else:
                  ship.move(ship.x + constants.SHIP_SPEED, ship.y)    
         
-        if left_button.value:
+        if io_expander.button_left.value:
         # if ship moves off left screen, move it back
             if ship.x < 0:
                 ship.x = 0
         #     # else move ship left
             else:
                 ship.move(ship.x - constants.SHIP_SPEED, ship.y)
-        if a_button.fell:
+        if io_expander.button_center.fell or io_expander.button_a.fell:
         # fire a laser, if we have enough power (meaning we have not used up all the lasers)
             for laser_number in range(len(lasers)):
                 if lasers[laser_number].x < 0:
                     lasers[laser_number].move(ship.x, ship.y)
                     break
         # each frame move the lasers, that have been fired, up
-
-        # first make all the neopixels yellow, then make them green if it is moving up
         lasers_moving_counter = -1
-        #for pixel_number in range(0, 5):
-        #    pixels[pixel_number] = (0, 10, 0)
-
+        
         for laser_number in range(len(lasers)):
             if lasers[laser_number].x > 0:
                 lasers[laser_number].move(lasers[laser_number].x, lasers[laser_number].y - constants.LASER_SPEED)
                 lasers_moving_counter = lasers_moving_counter + 1
-                #pixels[lasers_moving_counter] = (10, 10 - (2 * lasers_moving_counter + 2), 0)
                 if lasers[laser_number].y < constants.OFF_TOP_SCREEN:
                     lasers[laser_number].move(constants.OFF_SCREEN_X, constants.OFF_SCREEN_Y)
-        #if lasers_moving_counter == 4:
-        #    for pixel_number in range(0, 5):
-        #        pixels[pixel_number] = (10, 0, 0)
-        #pixels.show()
 
         # each frame move the aliens down the screen
         for alien_number in range(len(aliens)):
@@ -288,9 +247,7 @@ def game_scene():
                             score_text.text("Score: {0}".format(score))
                             # this will freeze the screen for a split second, but we have no option
                             game.render_block()
-                            # play sound effect
                             show_alien()
-        #                     show_alien()
                             alien_count = alien_count + 1
 
         # each frame check if any of the aliens are touching the ship
@@ -303,13 +260,8 @@ def game_scene():
                                  ship.x, ship.y,
                                  ship.x + 15, ship.y + 15):
                     # alien hit the ship
-                    # for pixel_number in range(0, 5):
-                    #     pixels[pixel_number] = (25, 0, 25)
-                    # pixels.show()
                     # Wait for 1 seconds
-                    time.sleep(4.0)
-                    # need to release the NeoPixels
-                    # pixels.deinit()
+                    time.sleep(1.0)
                     game_over_scene(score)
 
         # redraw sprite list
@@ -349,21 +301,15 @@ def game_over_scene(final_score):
     # render the background and inital location of sprite list
     # most likely you will only render background once per scene
     game.render_block()
-    io_expander = TCA9539(board.I2C())
-    start_button = Debouncer(io_expander.get_pin(14))
-    menu_button = Debouncer(io_expander.get_pin(15))
 
     while True:
-        io_expander.gpio_update()
-        start_button.update()
-        menu_button.update()
+        io_expander.update()
 
-        if start_button.fell:
+        if io_expander.button_start.fell:
             menu_scene()
-        if menu_button.fell:
+        if io_expander.button_menu.fell:
             return
 
 def main():
-    supervisor.disable_autoreload()
     splash_scene()
 

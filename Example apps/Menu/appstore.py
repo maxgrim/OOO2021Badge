@@ -7,7 +7,7 @@ import board
 import displayio
 from adafruit_display_text import label
 import terminalio
-from tca9539 import TCA9539
+from io_expander import IOExpander
 import settings
 import storage
 
@@ -26,7 +26,7 @@ def connect_wifi():
 
 
 def run_store(_):
-    io_expander = TCA9539(board.I2C())
+    io_expander = IOExpander(board.I2C())
 
     display = board.DISPLAY
     d_group_root = displayio.Group()

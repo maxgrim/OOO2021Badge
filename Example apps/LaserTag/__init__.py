@@ -6,7 +6,7 @@ import time
 import adafruit_irremote
 import pulseio
 import board
-from tca9539 import TCA9539
+from io_expander import IOExpander
 from adafruit_debouncer import Debouncer
 import adafruit_pcf8563
 import displayio
@@ -83,10 +83,7 @@ time_spacer = 10
 start_y = (240) - (120 + (6*time_spacer))
 
 #initialize buttons
-io_expander = TCA9539(board.I2C())
-a_button = Debouncer(io_expander.get_pin(4))
-menu_button = Debouncer(io_expander.get_pin(15))
-center_button = Debouncer(io_expander.get_pin(10))
+io_expander = IOExpander(board.I2C())
 
 #initiate IR 
 IR_PIN = board.IR_RECV # Pin connected to IR receiver.
@@ -110,7 +107,7 @@ def fuzzy_pulse_compare(pulse1, pulse2, fuzzyness=0.2):
         if abs(pulse1[i] - pulse2[i]) > threshold:
             return False
     return True
-#display killer
+#display killer/alive
 def display_killer(killer):
     if len(killer) > 0:
         display_label = label.Label(font, text="KILLED BY", color=0xcc3300)
@@ -137,9 +134,7 @@ def display_killer(killer):
 def main():
     while True:
         display_killer("")
-        io_expander.gpio_update()
-        a_button.update()
-        menu_button.update()
+        io_expander.update()
         # Loop waiting to receive pulses.
         # Wait for a pulse to be detected.
         detected = decoder.read_pulses(pulses)
@@ -304,7 +299,7 @@ def main():
             display_killer(shooter_name[52])
             time.sleep(5)
 
-        if center_button.fell or a_button.fell:
+        if io_expander.button_center.fell or io_expander.button_a.fell:
             if shooter_id < 25:
                 print(shooter_id)
                 encoder.transmit(pulseout, [255, 2, shooter_pulse[shooter_id], 255])
@@ -319,6 +314,6 @@ def main():
                 time.sleep(0.2)
             # wait so the receiver can get the full message
             time.sleep(0.2)
-        if menu_button.fell:
+        if io_expander.button_menu.fell:
             return
 

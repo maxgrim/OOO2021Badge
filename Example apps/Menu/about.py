@@ -2,13 +2,13 @@ import board
 import displayio
 
 from adafruit_display_text import label, wrap_text_to_pixels
-from tca9539 import TCA9539
+from io_expander import IOExpander
 
 import terminalio
 
 WRAP_WIDTH = 320
 
-io_expander = TCA9539(board.I2C())
+io_expander = IOExpander(board.I2C())
 
 about_text = (
     "OOO 2021 Space Cows has been made possible by:\n\n"
