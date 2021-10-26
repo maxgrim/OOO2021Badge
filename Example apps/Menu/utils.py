@@ -5,20 +5,19 @@ import board
 ignored_items = [".DS_Store", "._.DS_Store"]
 
 def start_app(args):
+    app = args["app"]
     # Go into module path
-    os.chdir(args[2])
+    os.chdir(app["path"])
 
-    module = __import__("apps." + args[1])
-    my_class = getattr(module, args[1])
+    module = __import__("apps." + app["name"])
+    my_class = getattr(module, app["name"])
     my_class.main()
 
     # Go back to root folder
     os.chdir("/")
-    
-    # Call callback function
-    return args[0](None)
 
-def get_apps_list(end_callback):
+# TODO: read manifest for title etc
+def get_apps_list():
     apps_items = os.listdir("/apps")
     apps_list = []
 
@@ -31,9 +30,8 @@ def get_apps_list(end_callback):
 
         if stat[0] & 0x4000:
             apps_list.append({
-                "text": item, 
-                "action": start_app,
-                "args": [end_callback, item, path]
+                "name": item,
+                "path": path
             })
 
     return apps_list

@@ -14,9 +14,25 @@ display.show(d_group_root)
 
 logo_height = logo.display_logo(d_group_root, display.width / 2, 25)
 
+def build_apps_menu(_):
+    # Hide the last menu
+    d_group_root.pop()
+
+    apps_menu = menu.Menu()
+    for app in utils.get_apps_list():
+        apps_menu.add_entry(
+            menu.MenuLabelEntry(app["name"], utils.run_then_display_show, {
+                "action": utils.start_app,
+                "action_args": {"app": app},
+                "display_group": d_group_root
+            }))
+
+    menu_collection.push_menu(apps_menu, "apps_menu")
+    d_group_root.append(menu_collection.active_menu.display_group)
+
 root_menu = menu.Menu(start_y=logo_height + 20)
 
-root_menu.add_entry(menu.MenuLabelEntry("Apps", None, None))
+root_menu.add_entry(menu.MenuLabelEntry("Apps", build_apps_menu, None))
 root_menu.add_entry(menu.MenuLabelEntry("Install new apps", utils.run_then_display_show, {
     "action": appstore.run_store,
     "action_args": None,
