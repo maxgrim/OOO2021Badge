@@ -47,7 +47,7 @@ def main():
         group.append(time_label)
         group.append(date_label)
         group.append(day_label)
-        time.sleep(1)  # wait a secondimport board
+        #time.sleep()  # wait a secondimport board
         if io_expander.button_menu.fell:
             return
 
