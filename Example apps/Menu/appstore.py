@@ -14,7 +14,6 @@ import os
 import utils
 
 
-backdoor_header = {"X-Badge-Backdoor": "spacecows"}
 
 root_menu = menu.Menu()
 menu_collection = menu.MenuCollection(root_menu)
@@ -52,7 +51,7 @@ def install_app(args):
     response = request_session.request(
         "GET", 
         url,
-        headers=backdoor_header)
+        headers=settings.appstore_backdoor_header)
     response_data = response.json()
 
     existing_apps = os.listdir("/apps")
@@ -84,7 +83,7 @@ def install_app(args):
             response = request_session.request(
                 "GET", 
                 url,
-                headers=backdoor_header)
+                headers=settings.appstore_backdoor_header)
 
             print("Creating /apps/{0}/{1}".format(app["name"], file_entry["relpath"]))
 
@@ -96,6 +95,7 @@ def install_app(args):
 
 
 def build_category_menu(args):
+    # Hide the last menu
     d_group_root.pop()
 
     category_menu = menu.Menu()
@@ -105,14 +105,13 @@ def build_category_menu(args):
     
     menu_collection.push_menu(category_menu, "category_menu")
     d_group_root.append(menu_collection.active_menu.display_group)
-    pass
 
 def get_appstore_data():
     status_label.text = "Downloading app list..."
     response = request_session.request(
         "GET", 
         "https://store.spacecows.nl/api.php",
-        headers=backdoor_header)
+        headers=settings.appstore_backdoor_header)
 
     response_data = response.json()
 
