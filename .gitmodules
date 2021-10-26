@@ -1,3 +1,0 @@
-[submodule "circuitpython"]
-	path = circuitpython
-	url = git@github.com:maxgrim/circuitpython.git
