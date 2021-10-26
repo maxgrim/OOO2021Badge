@@ -1,0 +1,6 @@
+{
+    "title": "BatteryLevel",
+    "description": "Battery display implementation",
+    "notes": "Reads the DAC pin to return the battery percentage.",
+    "author": "James"
+}

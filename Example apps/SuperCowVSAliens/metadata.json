@@ -1,0 +1,6 @@
+{
+    "title": "SuperCowVSAliens",
+    "description": "Meet SuperCow. The one cow trying to save the grass from being burned by Aliens.",
+    "notes": "You can change game properties in the constants.py. The game is upside down due to the game engine which does not have a rotation issue. And my math skills aren't good enough to figure some proper way to rotate the whole thing. Have a go at it if you want to :) The file to update is the _game C code.",
+    "author": "James"
+}

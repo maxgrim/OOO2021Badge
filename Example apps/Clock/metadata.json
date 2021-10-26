@@ -1,0 +1,6 @@
+{
+    "title": "Clock",
+    "description": "Clock implementation. Displays time and date using a cool font. So you never have an excuse to be late to a meeting",
+    "notes": "TODO: Figure out how to display the week numbers",
+    "author": "James"
+}

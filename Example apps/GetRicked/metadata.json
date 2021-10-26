@@ -1,0 +1,6 @@
+{
+    "title": "GetRicked",
+    "description": "Audio implementation playing our favourite tune from Rick. The WAV file is pretty large and at the time of writing we do not have enough storage space to play it.",
+    "notes": "Requires the wav file to be in the application folder of the app.",
+    "author": "Max"
+}
