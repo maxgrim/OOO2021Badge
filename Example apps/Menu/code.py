@@ -8,13 +8,35 @@ import utils
 import time
 import settings
 import terminalio
-
+import battery
+import digitalio
+from analogio import AnalogIn
+import adafruit_imageload
 from adafruit_display_text import label, wrap_text_to_pixels
 from io_expander import IOExpander
 
 display = board.DISPLAY
+analog_in = AnalogIn(board.SENSE_BATT)
+usb = digitalio.DigitalInOut(board.SENSE_USB)
+usb.direction = digitalio.Direction.INPUT
 d_group_root = displayio.Group()
 display.show(d_group_root)
+
+# Load the sprite sheet (bitmap)
+sprite_sheet, palette = adafruit_imageload.load("/img/batteries.bmp",
+                                                bitmap=displayio.Bitmap,
+                                                palette=displayio.Palette)
+
+battery_group = displayio.Group(scale=3)
+# Create a sprite (tilegrid)
+sprite = displayio.TileGrid(sprite_sheet, pixel_shader=palette,
+                            width=1,
+                            height=1,
+                            tile_width=9,
+                            tile_height=4)
+battery_group.append(sprite)
+battery_group.x = display.width - 30
+d_group_root.append(battery_group)
 
 logo_height = logo.display_logo(d_group_root, display.width / 2, 25)
 
@@ -78,7 +100,7 @@ last_button_time = time.monotonic()
 
 while True:
     io_expander.update()
-
+    battery.get_battery_percentage(sprite, analog_in.value, usb.value)
     if io_expander.any_button_fell:
         last_button_time = time.monotonic()
 
