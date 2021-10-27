@@ -21,11 +21,18 @@ def main():
     i=0
     font = bitmap_font.load_font("/fonts/spacefont-front-32.pcf")
     font.load_glyphs(b'012345QWERTYUIOPLKJHGFDSAZXCVBNM')
+    scow_spacer = 10
+    header_label = label.Label(font, text="ANIMATION", color=0xFFFFFF)
+    header_label.anchor_point = (0.5, 0.5)
+    header_label.anchored_position = (320 / 2, 200 / 2)
     animation_label = label.Label(font, text="", color=0xFFFFFF)
     animation_label.anchor_point = (0.5, 0.5)
-    animation_label.anchored_position = (320 / 2, 240 / 2)
+    animation_label.anchored_position = (320 / 2, 200 / 2+scow_spacer *2 + header_label.height)
+    
+
     display = board.DISPLAY
     group = displayio.Group()
+    group.append(header_label)
     group.append(animation_label)
     display.show(group)
 
