@@ -29,7 +29,7 @@ loading_label.anchor_point = (0.5, 0.5)
 loading_label.anchored_position = (board.DISPLAY.width / 2, board.DISPLAY.height / 2)
 loading_group.append(loading_label)
 
-def go_menu_back():
+def go_menu_back(args):
     # Remove the last menu
     d_group_root.pop()
     menu_collection.pop_menu()
@@ -92,8 +92,8 @@ while True:
         selected_item = menu_collection.active_menu.selected_item
         selected_item.execute_action()
 
-    if io_expander.button_menu.fell:
-        go_menu_back()
+    if io_expander.button_menu.fell or io_expander.button_b.fell:
+        go_menu_back(None)
 
     if time.monotonic() > last_button_time + settings.screensaver_timeout:
         utils.screensaver()
