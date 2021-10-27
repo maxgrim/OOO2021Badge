@@ -12,6 +12,7 @@ io_expander = IOExpander(board.I2C())
 
 about_text = (
     "OOO 2021 Space Cows has been made possible by:\n\n"
+    "- Cedric van Bockhaven\n"
     "- Christiaan van den Boogaard\n"
     "- Anneloes Geerts\n"
     "- James Gratchoff\n"
