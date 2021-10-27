@@ -14,7 +14,6 @@ import os
 import utils
 
 
-
 root_menu = menu.Menu()
 menu_collection = menu.MenuCollection(root_menu)
 d_group_root = displayio.Group()
@@ -28,6 +27,11 @@ appstore_data = {}
 socket_pool = None
 request_session = None
 
+def go_menu_back(args):
+    # Remove the last menu
+    d_group_root.pop()
+    menu_collection.pop_menu()
+    d_group_root.append(menu_collection.active_menu.display_group)
 
 def connect_wifi():
     try:
@@ -93,16 +97,30 @@ def install_app(args):
     
     os.sync()
 
+def build_app_overview_menu(args):
+    # Remove the last menu
+    d_group_root.pop()
+
+    app = args["app"]
+
+    app_overview_menu = menu.Menu()
+    app_overview_menu.add_entry(menu.MenuLabelEntry("Install", install_app, {"app": app}))
+    app_overview_menu.add_entry(menu.MenuLabelEntry("Go back", go_menu_back, {}))
+    
+    menu_collection.push_menu(app_overview_menu, "app_overview_menu")
+    d_group_root.append(menu_collection.active_menu.display_group)
 
 def build_category_menu(args):
     # Remove the last menu
     d_group_root.pop()
 
     category_menu = menu.Menu()
-    
+
     for app in appstore_data[args["category_name"]]:
-        category_menu.add_entry(menu.MenuLabelEntry(app["title"], install_app, {"app": app}))
-    
+        category_menu.add_entry(menu.MenuLabelEntry(app["title"], build_app_overview_menu, {"app": app}))
+
+    category_menu.add_entry(menu.MenuLabelEntry("Go back", go_menu_back, {}))
+
     menu_collection.push_menu(category_menu, "category_menu")
     d_group_root.append(menu_collection.active_menu.display_group)
 
@@ -178,6 +196,10 @@ def run_store(_):
         if io_expander.button_center.fell or io_expander.button_a.fell:
             selected_item = menu_collection.active_menu.selected_item
             selected_item.execute_action()
+
+        if io_expander.button_menu.fell or io_expander.button_b.fell:
+            go_menu_back(None)
+
 
 
 # # def jump_to_app_details_menu(args):
