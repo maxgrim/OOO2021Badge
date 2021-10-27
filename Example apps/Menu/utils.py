@@ -52,10 +52,14 @@ def delete_folder_recursive(path):
             os.remove(current_path)
     os.rmdir(path)
 
-def run_then_display_show(args):
-    args["action"](args["action_args"])
-    board.DISPLAY.show(args["display_group"])
+def run_and_display(args):
+    if "display_before" in args:
+        board.DISPLAY.show(args["display_before"])
 
+    args["action"](args["action_args"])
+
+    if "display_after" in args:
+        board.DISPLAY.show(args["display_after"])
 
 def screensaver():
     io_expander = IOExpander(board.I2C())

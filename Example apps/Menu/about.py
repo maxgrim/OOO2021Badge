@@ -40,18 +40,12 @@ def build_label():
 
 def show_about(_):
     global about_label
-
-    display.show(group)
     
     if about_label is None:
-        loading_label = label.Label(terminalio.FONT, text="Loading...", color=0xFF0000)
-        loading_label.anchor_point = (0.5, 0.5)
-        loading_label.anchored_position = (320 / 2, 240 / 2)
-        group.append(loading_label)
-
         about_label = build_label()
-        group.remove(loading_label)
         group.append(about_label)
+
+    display.show(group)
 
     while True:
         io_expander.update()

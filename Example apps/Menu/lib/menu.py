@@ -1,5 +1,4 @@
 from adafruit_display_text import label, wrap_text_to_pixels
-from adafruit_bitmap_font import bitmap_font
 import terminalio
 import displayio
 
@@ -38,32 +37,17 @@ class MenuCollection:
         self.menu_stack.append(menu_name)
 
     def pop_menu(self):
-        last_menu = self.menu_stack.pop()
-        del self.menus[last_menu]
+        if len(self.menu_stack) > 1:
+            last_menu = self.menu_stack.pop()
+            del self.menus[last_menu]
 
 class Menu:
-    def __init__(self, start_x=10, start_y=10, heading=None):
+    def __init__(self, start_x=10, start_y=10):
         self.entries = []
         self.display_group = displayio.Group()
 
         self.start_x = start_x
         self.start_y = start_y
-
-        if heading is not None:
-            heading_label = label.Label(
-                terminalio.FONT,
-                text="\n".join(wrap_text_to_pixels(
-                    heading, 300, terminalio.FONT)),
-                color=0x00FF00
-            )
-            
-            heading_label.anchor_point = (0.0, 0.0)
-            heading_label.anchored_position = \
-                (self.start_x, self.start_y)
-
-            self.display_group.append(heading_label)
-            self.start_y = self.start_y + \
-                heading_label.y + heading_label.height
 
         self.active_index = 0
         self.active_indicator = label.Label(terminalio.FONT, \
@@ -83,11 +67,17 @@ class Menu:
         self.display_group.append(entry.label)
 
     def move_up(self):
+        if len(self.entries) == 0:
+            return
+
         self.active_index = self.active_index - 1
         self.active_index %= len(self.entries)
         self.update_active_indicator()
 
     def move_down(self):
+        if len(self.entries) == 0:
+            return
+
         self.active_index = self.active_index + 1
         self.active_index %= len(self.entries)
         self.update_active_indicator()
