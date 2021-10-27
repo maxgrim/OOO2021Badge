@@ -14,18 +14,21 @@ def get_battery_percentage():
         battery_mean_calc = analog_in.value + battery_mean_calc
         if x == 199:
             battery_mean_calc = int((((battery_mean_calc/200)-34000) * 100)/(41000-34000))
-            if battery_mean_calc > 90:
+            if battery_mean_calc > 100:
                 print("Charging")
                 sprite[0] = 0 % 6
+            if battery_mean_calc > 90 and battery_mean_calc < 101:
+                print("Charging")
+                sprite[0] = 1 % 6
             if battery_mean_calc > 66 and battery_mean_calc < 90:
                 print("Full")
-                sprite[0] = 1 % 6
-            if battery_mean_calc > 33 and battery_mean_calc < 66:
-                print("Medium")
                 sprite[0] = 2 % 6
-            if battery_mean_calc > 0 and battery_mean_calc < 33:
-                print("Low")
+            if battery_mean_calc > 33 and battery_mean_calc < 67:
+                print("Medium")
                 sprite[0] = 3 % 6
+            if battery_mean_calc > 0 and battery_mean_calc < 34:
+                print("Low")
+                sprite[0] = 4 % 6
         x = x +1
 # Load the sprite sheet (bitmap)
 sprite_sheet, palette = adafruit_imageload.load("batteries.bmp",
