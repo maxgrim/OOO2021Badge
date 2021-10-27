@@ -39,4 +39,3 @@ def main():
             i = i % (len(colors))
         if io_expander.button_menu.fell:
             return
-main()
