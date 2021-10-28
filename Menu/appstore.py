@@ -15,6 +15,10 @@ import utils
 import time
 
 
+socket_pool = socketpool.SocketPool(wifi.radio)
+request_session = adafruit_requests.Session(
+    socket_pool, ssl.create_default_context())
+
 root_menu = menu.Menu()
 menu_collection = menu.MenuCollection(root_menu)
 d_group_root = displayio.Group()
@@ -24,9 +28,6 @@ status_label.anchor_point = (0.5, 0.5)
 status_label.anchored_position = (board.DISPLAY.width / 2, board.DISPLAY.height / 2)
 
 appstore_data = {}
-
-socket_pool = None
-request_session = None
 
 def go_menu_back(args):
     # Remove the last menu
@@ -179,11 +180,11 @@ def exit_run_store(_):
     should_exit = True
 
 def run_store(_):
-    global socket_pool, request_session
+    # Hack
+    while len(root_menu.entries) > 0:
+        root_menu.entries.pop()
+    root_menu.active_index = 0
 
-    socket_pool = socketpool.SocketPool(wifi.radio)
-    request_session = adafruit_requests.Session(
-        socket_pool, ssl.create_default_context())
     io_expander = IOExpander(board.I2C())
 
     display = board.DISPLAY
@@ -197,6 +198,8 @@ def run_store(_):
         while True:
             io_expander.update()
             if io_expander.button_b.fell:
+                while len(d_group_root) > 0:
+                    d_group_root.pop() 
                 return
 
     status_label.text = "Connecting to WiFi..."
@@ -206,6 +209,8 @@ def run_store(_):
         while True:
             io_expander.update()
             if io_expander.button_b.fell:
+                while len(d_group_root) > 0:
+                    d_group_root.pop() 
                 return
 
     get_appstore_data()
@@ -235,6 +240,11 @@ def run_store(_):
 
         if io_expander.button_menu.fell or io_expander.button_b.fell:
             if len(menu_collection.menus) == 1:
+                while len(d_group_root) > 0:
+                    d_group_root.pop() 
                 return
             else:
                 go_menu_back(None)
+    # Exit
+    while len(d_group_root) > 0:
+        d_group_root.pop() 
