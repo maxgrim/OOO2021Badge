@@ -2,7 +2,7 @@ import audiobusio
 import board
 from digitalio import DigitalInOut, Direction
 from audiocore import RawSample
-import adafruit_rtttl
+import rtttl
 
 # http://ringtone.vulc.in/
 
@@ -41,6 +41,6 @@ SONGS = [
 
 
 audio_en.value = True
-adafruit_rtttl.play(i2s, SONGS[-1])
+rtttl.play(i2s, SONGS[0])
 audio_en.value = False
 i2s.stop()

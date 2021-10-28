@@ -7,12 +7,12 @@ import neopixel
 import time
 from adafruit_led_animation.animation.pulse import Pulse
 from adafruit_led_animation.color import AMBER
-
+import settings
 
 
 def display_rocket():
-
     display = board.DISPLAY
+
     # Load the sprite sheet (bitmap)
     rocket, rocket_p = adafruit_imageload.load("8.bmp",
                                                     bitmap=displayio.Bitmap,
@@ -36,8 +36,8 @@ def display_rocket():
         group.y -= 2
         group.y += y_speed
         time.sleep(0.01)
+
         if group.y == -50:
-            print("TO DO: go back to menu")
             return
         
 def main():
@@ -59,7 +59,7 @@ def main():
     scow_spacer = 10
     start_y = (240) #- (48 * 3 + (4 * scow_spacer)) - 150
 
-    cowname_label = label.Label(font, text="TEMPNAME", color=0xFFFFFF)
+    cowname_label = label.Label(font, text=settings.cow_name(), color=0xFFFFFF)
     cowname_label.anchor_point = (0.5, 0.5)
     cowname_label.anchored_position = (320 / 2, start_y)
 
@@ -89,7 +89,6 @@ def main():
     group.append(to_label)
     group.append(scows_label)
 
-
     while True:
         pulse.animate()
         cowname_label.anchored_position = (320 / 2, start_y)
@@ -98,6 +97,8 @@ def main():
         scows_label.anchored_position = (320 / 2, start_y + (scow_spacer * 3) + welcome_label.height + to_label.height + scows_label.height)
         start_y -= 2
         time.sleep(0.01)
+        
         if start_y == -200:
             display_rocket()
+            pixels.deinit()
             return

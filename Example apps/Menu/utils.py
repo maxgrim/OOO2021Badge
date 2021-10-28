@@ -3,9 +3,12 @@ import board
 import adafruit_imageload
 import displayio
 import random
+import microcontroller
 
 from io_expander import IOExpander
+from micropython import const
 
+NVM_INDEX_INTRO_PLAYED = const(0)
 
 ignored_items = [".DS_Store", "._.DS_Store"]
 
@@ -21,7 +24,15 @@ def start_app(args):
     # Go back to root folder
     os.chdir("/")
 
-# TODO: read manifest for title etc
+def has_intro_played():
+    return microcontroller.nvm[NVM_INDEX_INTRO_PLAYED] == 1
+
+def set_intro_played():
+    microcontroller.nvm[NVM_INDEX_INTRO_PLAYED] = 1
+
+def is_app_installed(app_name):
+    return app_name in os.listdir("/apps")
+
 def get_apps_list():
     apps_items = os.listdir("/apps")
     apps_list = []
@@ -56,10 +67,15 @@ def run_and_display(args):
     if "display_before" in args:
         board.DISPLAY.show(args["display_before"])
 
-    args["action"](args["action_args"])
+    for i, action in enumerate(args["actions"]):
+        action(args["actions_args"][i])
 
     if "display_after" in args:
         board.DISPLAY.show(args["display_after"])
+
+def run_list(args):
+    for i, item in enumerate(args["run_actions"]):
+        item(args["run_args"][i])
 
 def screensaver():
     io_expander = IOExpander(board.I2C())
