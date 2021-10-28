@@ -92,5 +92,5 @@ def show_about(_):
             move_down()
         if io_expander.button_up.fell:
             move_up()        
-        if io_expander.button_menu.fell:
+        if io_expander.button_menu.fell or io_expander.button_b.fell:
             return

@@ -23,7 +23,7 @@ status_label.anchored_position = (board.DISPLAY.width / 2, board.DISPLAY.height 
 io_expander = IOExpander(board.I2C())
 
 def update_firmware():
-    status_label.text = "Installing app"
+    status_label.text = "Searching firmware..."
 
     url = settings.appstore_base_url + "/api.php?path=firmware&act=getapp&name=firmware"
 
@@ -33,10 +33,10 @@ def update_firmware():
         headers=settings.appstore_backdoor_header)
     response_data = response.json()
 
-    status_label.text = "Removing current firmware\nThis takes a while"
+    status_label.text = "Removing current firmware\nThis takes a while..."
     utils.delete_firmware_recursive("/")
 
-    status_label.text = "Creating directories"
+    status_label.text = "Creating directories..."
 
     for file_entry in response_data["filelist"]:
         if file_entry["type"] != "folder":
@@ -78,7 +78,7 @@ def update_firmware():
 
     os.sync()
 
-    status_label.text = "New firmware installed, reset the device"
+    status_label.text = "New firmware installed, reset the device now"
     status_label.color = 0x00FF00
 
     while True:
@@ -92,7 +92,7 @@ def main(_):
     display.show(d_group_root)
 
     warning_text = (
-        "WARNING!\n"
+        "WARNING!!\n"
         "This is a dangerous operation. Don't reset the device during "
         "the update and keep a steady WiFi signal.\n\n"
         "[A] Continue\n"
