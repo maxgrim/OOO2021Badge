@@ -103,7 +103,8 @@ root_menu.add_entry(menu.MenuLabelEntry("Install new apps", utils.run_and_displa
     "display_after": d_group_root
 }))
 
-root_menu.add_entry(menu.MenuLabelEntry("Settings", None, None))
+# TODO: implement
+# root_menu.add_entry(menu.MenuLabelEntry("Settings", None, None))
 root_menu.add_entry(menu.MenuLabelEntry("About", utils.run_and_display, {
     "actions": [about.show_about],
     "actions_args": [None],
