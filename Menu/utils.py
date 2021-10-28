@@ -93,11 +93,16 @@ def delete_folder_recursive(path):
     os.rmdir(path)
 
 def run_and_display(args):
+    if "actions_before" in args:
+        for i, action in enumerate(args["actions_before"]):
+            action(args["actions_before_args"][i])
+
     if "display_before" in args:
         board.DISPLAY.show(args["display_before"])
 
-    for i, action in enumerate(args["actions"]):
-        action(args["actions_args"][i])
+    if "actions_after" in args:
+        for i, action in enumerate(args["actions_after"]):
+            action(args["actions_after_args"][i])
 
     if "display_after" in args:
         board.DISPLAY.show(args["display_after"])

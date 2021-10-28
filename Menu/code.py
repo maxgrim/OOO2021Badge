@@ -67,9 +67,15 @@ def go_menu_back(args):
     # Remove the last menu
     d_group_root.pop()
     menu_collection.pop_menu()
+
+    # Ugly
+    if len(menu_collection.menus) == 1:
+        show_logo(None)
+
     d_group_root.append(menu_collection.active_menu.display_group)
 
 def show_logo(args):
+    print("test")
     d_group_root.append(d_group_logo)
 
 def hide_logo(args):
@@ -82,40 +88,47 @@ def build_apps_menu(_):
     hide_logo(None)
 
     apps_menu = menu.Menu()
+    
     for app in utils.get_apps_list():
         apps_menu.add_entry(
             menu.MenuLabelEntry(app["name"], utils.run_and_display, {
-                "actions": [utils.start_app, show_logo],
-                "actions_args": [{"app": app}, None],
+                "actions_before": [utils.start_app],
+                "actions_before_args": [{"app": app}],
+                "actions_after": [go_menu_back],
+                "actions_after_args": [None],
                 "display_before": loading_group,
                 "display_after": d_group_root
             }))
 
-    apps_menu.add_entry(menu.MenuLabelEntry("Go back", go_menu_back, None))
     menu_collection.push_menu(apps_menu, "apps_menu")
     d_group_root.append(menu_collection.active_menu.display_group)
 
 root_menu = menu.Menu(start_y=logo_height + name_label.height + 20)
 
-root_menu.add_entry(menu.MenuLabelEntry("Apps", build_apps_menu, None))
+root_menu.add_entry(menu.MenuLabelEntry("Apps", utils.run_and_display, {
+    "actions_before": [build_apps_menu],
+    "actions_before_args": [None],
+    "display_after": d_group_root
+}))
+
 root_menu.add_entry(menu.MenuLabelEntry("Install new apps", utils.run_and_display, {
-    "actions": [appstore.run_store],
-    "actions_args": [None],
+    "actions_before": [appstore.run_store],
+    "actions_before_args": [None],
     "display_after": d_group_root
 }))
 
 # TODO: implement
 # root_menu.add_entry(menu.MenuLabelEntry("Settings", None, None))
 root_menu.add_entry(menu.MenuLabelEntry("About", utils.run_and_display, {
-    "actions": [about.show_about],
-    "actions_args": [None],
+    "actions_before": [about.show_about],
+    "actions_before_args": [None],
     "display_before": loading_group,
     "display_after": d_group_root
 }))
 
 root_menu.add_entry(menu.MenuLabelEntry("Update firmware", utils.run_and_display, {
-    "actions": [update.main],
-    "actions_args": [None],
+    "actions_before": [update.main],
+    "actions_before_args": [None],
     "display_before": loading_group,
     "display_after": d_group_root
 }))
@@ -144,8 +157,8 @@ def play_intro():
     
     if intro_app is not None:
         utils.run_and_display({
-            "actions": [utils.start_app],
-            "actions_args": [{"app": app}],
+            "actions_before": [utils.start_app],
+            "actions_before_args": [{"app": app}],
             "display_before": loading_group,
             "display_after": d_group_root
         })
