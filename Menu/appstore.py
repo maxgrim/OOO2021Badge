@@ -34,16 +34,6 @@ def go_menu_back(args):
     menu_collection.pop_menu()
     d_group_root.append(menu_collection.active_menu.display_group)
 
-def connect_wifi():
-    try:
-        wifi.radio.connect(
-            ssid=settings.wifi_ssid, 
-            password=settings.wifi_psk
-        )
-        return True
-    except ConnectionError:
-        return False
-
 def install_app(args):
     for _ in range(len(d_group_root)):
         d_group_root.pop()
@@ -203,17 +193,20 @@ def run_store(_):
     try:
         storage.remount("/", False)
     except RuntimeError:
-        status_label.text = "USB drive has to be ejected"
-        # TODO fix this
+        status_label.text = "USB drive has to be ejected\n[B] Go back"
         while True:
-            pass
+            io_expander.update()
+            if io_expander.button_b.fell:
+                return
 
     status_label.text = "Connecting to WiFi..."
 
-    if not connect_wifi():
-        status_label.text = "Failed to connect! :("
+    if not utils.connect_wifi():
+        status_label.text = "Failed to connect! :(\n[B] Go back"
         while True:
-            pass
+            io_expander.update()
+            if io_expander.button_b.fell:
+                return
 
     get_appstore_data()
 

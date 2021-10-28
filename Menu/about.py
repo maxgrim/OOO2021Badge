@@ -6,7 +6,7 @@ from io_expander import IOExpander
 
 import terminalio
 
-WRAP_WIDTH = 320
+WRAP_WIDTH = board.DISPLAY.width
 
 io_expander = IOExpander(board.I2C())
 

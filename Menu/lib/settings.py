@@ -1,3 +1,9 @@
+import microcontroller
+from micropython import const
+
+
+NVM_INDEX_COW_NAME_INDEX = const(1)
+
 wifi_ssid="MooNet"
 wifi_psk="1337cows"
 
@@ -6,7 +12,7 @@ appstore_backdoor_header = {"X-Badge-Backdoor": "spacecows"}
 
 screensaver_timeout = 30
 
-cow_index = 33
+cow_index = microcontroller.nvm[NVM_INDEX_COW_NAME_INDEX]
 cow_names = ["AV", "J33K0", "BERTA", "MOO!", "GRAAYNA", "FERDINAND", "BUTCHIE", 
     "BERTHA CVXII", "BELLA", "KLEINMAARFIJN", "BENNIE ", "HUGH HEIFER", "D_COW", 
     "PATCHES", "NO IDEA :D BILLY OR SOMETHING", "DOGUCOW", "MUU", "MOO", "COWHISPERER", 

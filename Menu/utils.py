@@ -4,6 +4,8 @@ import adafruit_imageload
 import displayio
 import random
 import microcontroller
+import wifi
+import settings
 
 from io_expander import IOExpander
 from micropython import const
@@ -11,6 +13,16 @@ from micropython import const
 NVM_INDEX_INTRO_PLAYED = const(0)
 
 ignored_items = [".DS_Store", "._.DS_Store"]
+
+def connect_wifi():
+    try:
+        wifi.radio.connect(
+            ssid=settings.wifi_ssid, 
+            password=settings.wifi_psk
+        )
+        return True
+    except ConnectionError:
+        return False
 
 def start_app(args):
     app = args["app"]
@@ -51,6 +63,23 @@ def get_apps_list():
             })
 
     return apps_list
+
+# Ugly but it'll have to do for now
+def delete_firmware_recursive(path):
+    for file in os.listdir(path):
+        if path != "/":
+            current_path = path + "/" + file
+        else:
+            if file == "apps":
+                # Skip apps folder
+                continue
+            current_path = file
+
+        stat = os.stat(current_path)
+        if stat[0] & 0x4000:
+            delete_firmware_recursive(current_path)
+        else:
+            os.remove(current_path)
 
 def delete_folder_recursive(path):
     for file in os.listdir(path):

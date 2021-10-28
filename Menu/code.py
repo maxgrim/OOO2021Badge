@@ -15,6 +15,7 @@ import adafruit_imageload
 from adafruit_display_text import label, wrap_text_to_pixels
 from io_expander import IOExpander
 import os
+import update
 
 
 display = board.DISPLAY
@@ -111,6 +112,14 @@ root_menu.add_entry(menu.MenuLabelEntry("About", utils.run_and_display, {
     "display_before": loading_group,
     "display_after": d_group_root
 }))
+
+root_menu.add_entry(menu.MenuLabelEntry("Update firmware", utils.run_and_display, {
+    "actions": [update.main],
+    "actions_args": [None],
+    "display_before": loading_group,
+    "display_after": d_group_root
+}))
+
 
 d_group_root.append(root_menu.display_group)
 menu_collection = menu.MenuCollection(root_menu)
