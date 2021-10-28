@@ -99,11 +99,13 @@ def install_app(args):
                 url,
                 headers=settings.appstore_backdoor_header)
 
-            if file_entry["path"].startswith("lib/"):
-                file_entry["path"] = "/" + file_entry["path"]
-
             status_label.text = "Writing file ({0}/{1})".format(i + 1, len(response_data["filelist"]))
-            f = open("/apps/" + app["name"] + "/" + file_entry["relpath"], "wb")
+
+            if file_entry["relpath"].startswith("lib/"):
+                f = open("/" + file_entry["relpath"], "wb")
+            else:
+                f = open("/apps/" + app["name"] + "/" + file_entry["relpath"], "wb")
+
             f.write(response.content)
             f.close()
 
@@ -141,8 +143,13 @@ def build_category_menu(args):
 
     for app in appstore_data[args["category_name"]]:
         title = app["title"]
+        
+        if app["author"] is not None:
+            title = title + " - by " + app["author"]
+        
         if utils.is_app_installed(app["name"]):
             title = title + " (installed)"
+        
         category_menu.add_entry(menu.MenuLabelEntry(title, build_app_overview_menu, {"app": app}))
 
     category_menu.add_entry(menu.MenuLabelEntry("Go back", go_menu_back, None))
@@ -166,10 +173,12 @@ def get_appstore_data():
             for (author, author_obj) in path_obj["paths"].items():
                 for app in author_obj["apps"]:
                     app["path"] = "{0}/{1}".format(path, author)
+                    app["author"] = author
                     appstore_data[path].append(app)
         else:
             for app in path_obj["apps"]:
                 app["path"] = path
+                app["author"] = None
                 appstore_data[path].append(app)
 
 
