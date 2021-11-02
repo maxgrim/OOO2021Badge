@@ -111,6 +111,12 @@ def build_apps_menu(_):
                 "display_after": d_group_root
             }))
 
+    apps_menu.add_entry(
+        menu.MenuLabelEntry("Go back", utils.run_and_display, {
+            "actions_before": [go_menu_back],
+            "actions_before_args": [None]
+        }))
+    
     menu_collection.push_menu(apps_menu, "apps_menu")
     d_group_root.append(menu_collection.active_menu.display_group)
 
