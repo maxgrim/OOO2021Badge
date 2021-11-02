@@ -174,6 +174,7 @@ def get_appstore_data():
 
 should_exit = False
 
+# Trigger while loop to exit
 def exit_run_store(_):
     global should_exit
     should_exit = True
@@ -238,12 +239,16 @@ def run_store(_):
             selected_item.execute_action()
 
         if io_expander.button_menu.fell or io_expander.button_b.fell:
+            # Exit the appstore when in the root menu and "back" is requested
             if len(menu_collection.menus) == 1:
+                # Clear all display elements
                 while len(d_group_root) > 0:
-                    d_group_root.pop() 
+                    d_group_root.pop()
+                # Exit
                 return
             else:
                 go_menu_back(None)
-    # Exit
+
+    # Exit the appstore
     while len(d_group_root) > 0:
         d_group_root.pop() 
