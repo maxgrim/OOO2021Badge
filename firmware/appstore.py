@@ -135,8 +135,8 @@ def build_category_menu(args):
     for app in appstore_data[args["category_name"]]:
         title = app["title"]
         
-        if app["author"] is not None:
-            title = title + " - by " + app["author"]
+        if "author" in app and app["author"] is not None:
+            title = title + " (by {0})".format(app["author"])
         
         if utils.is_app_installed(app["name"]):
             title = title + " (installed)"
@@ -169,7 +169,6 @@ def get_appstore_data():
         else:
             for app in path_obj["apps"]:
                 app["path"] = path
-                app["author"] = None
                 appstore_data[path].append(app)
 
 

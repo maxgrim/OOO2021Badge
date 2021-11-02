@@ -64,18 +64,21 @@ loading_group.append(loading_label)
 
 
 def go_menu_back(args):
-    # Remove the last menu
+    # Don't go back if we are at the root menu
+    if len(menu_collection.menus) == 1:
+        return
+
+    # Remove the current menu
     d_group_root.pop()
     menu_collection.pop_menu()
 
-    # Ugly
+    # Show logo if we arrive at the root menu
     if len(menu_collection.menus) == 1:
         show_logo(None)
 
     d_group_root.append(menu_collection.active_menu.display_group)
 
 def show_logo(args):
-    print("test")
     d_group_root.append(d_group_logo)
 
 def hide_logo(args):
@@ -90,8 +93,16 @@ def build_apps_menu(_):
     apps_menu = menu.Menu()
     
     for app in utils.get_apps_list():
+        app_label = app["name"]
+
+        if "title" in app and app["title"] is not None:
+            app_label = app["title"]
+
+        if "author" in app and app["author"] is not None:
+            app_label = app_label + " (by {0})".format(app["author"])
+        
         apps_menu.add_entry(
-            menu.MenuLabelEntry(app["name"], utils.run_and_display, {
+            menu.MenuLabelEntry(app_label, utils.run_and_display, {
                 "actions_before": [utils.start_app],
                 "actions_before_args": [{"app": app}],
                 "actions_after": [go_menu_back],

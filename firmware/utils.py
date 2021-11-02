@@ -6,6 +6,7 @@ import random
 import microcontroller
 import wifi
 import settings
+import json
 
 from io_expander import IOExpander
 from micropython import const
@@ -57,10 +58,26 @@ def get_apps_list():
         stat = os.stat(path)
 
         if stat[0] & 0x4000:
-            apps_list.append({
+            app = {
                 "name": item,
-                "path": path
-            })
+                "path": path,
+                "title": None,
+                "author": None,
+                "description": None
+            }
+
+            try:
+                f = open(path + "/metadata.json")
+                metadata = json.load(f)
+                if "title" in metadata:
+                    app["title"] = metadata["title"]
+                if "author" in metadata:
+                    app["author"] = metadata["author"]
+                if "description" in metadata:
+                    app["description"] = metadata["description"]
+            except OSError:
+                pass
+            apps_list.append(app)
 
     return apps_list
 
